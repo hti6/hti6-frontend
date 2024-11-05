@@ -5,7 +5,7 @@ import { sidebarLinks } from "../links";
 
 function getLabelByRoute(route: string): string {
   switch (route) {
-    case "/requests":
+    case "/applications":
       return "заявки";
     case "/video":
       return "камеры";

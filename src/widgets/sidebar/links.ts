@@ -18,7 +18,7 @@ export const sidebarLinks: SidebarLink[] = [
   },
   {
     label: "Заявки",
-    href: "/requests",
+    href: "/applications",
     Icon: NotesIcon,
   },
   {
