@@ -4,7 +4,7 @@ import { Category, DamageRequest, ApiResponse } from "../types";
 import { TableConfig } from "@/widgets/table/types";
 
 export const ApplicationsPage = () => {
-  const tableConfig: TableConfig<DamageRequest> = {
+  const tableConfig: TableConfig<DamageRequest, ApiResponse> = {
     endpoint: "http://nvision.su/api/v1/user/damage_requests",
     columns: [
       {
@@ -16,8 +16,7 @@ export const ApplicationsPage = () => {
         key: "priority",
         title: "СРОЧНОСТЬ",
         sortable: true,
-        render: (value: string) => {
-          return (
+        render: (value: string | number | Category[]) => (
             <span>
               {value == "critical"
                 ? "Критический"
@@ -27,13 +26,12 @@ export const ApplicationsPage = () => {
                     ? "Средний"
                     : "Низкий"}
             </span>
-          );
-        },
+          )
       },
       {
-        key: "location",
+        key: "latitude",
         title: "МЕСТОПОЛОЖЕНИЕ",
-        render: (_: any, row: DamageRequest) => (
+        render: (_: string | number | Category[], row: DamageRequest) => (
           <span>
             {row.latitude}, {row.longitude}
           </span>
@@ -42,9 +40,10 @@ export const ApplicationsPage = () => {
       {
         key: "categories",
         title: "ТИП ПОВРЕЖДЕНИЯ",
-        render: (categories: Category[]) => (
+        render: (categories: string | number | Category[]) => (
           <div className="flex flex-wrap gap-1">
-            {categories.length > 0 ? (
+            {Array.isArray(categories) &&
+              categories.length > 0 ? (
               categories.map((category) => (
                 <span
                   key={category.id}
@@ -63,8 +62,8 @@ export const ApplicationsPage = () => {
         key: "created_at",
         title: "ДАТА",
         sortable: true,
-        render: (value: string) => {
-          const date = new Date(value);
+        render: (value: string | number | Category[]) => {
+          const date = new Date(value as string);
           return date.toLocaleString("ru-RU", {
             day: "2-digit",
             month: "2-digit",

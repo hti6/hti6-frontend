@@ -1,9 +1,10 @@
 import { Camera, CamerasResponse } from "@/pages/video/types";
 import { AddLarge } from "@atomaro/icons";
 import { TableWidget } from "@/widgets/table";
+import {TableConfig} from "@/widgets/table/types";
 
 export const VideoPage = () => {
-  const tableConfig = {
+  const tableConfig: TableConfig<Camera, CamerasResponse> = {
     endpoint: "http://nvision.su/api/v1/user/cameras",
     columns: [
       {
@@ -13,10 +14,10 @@ export const VideoPage = () => {
         className: "w-[300px]",
       },
       {
-        key: "location",
+        key: "latitude",
         title: "МЕСТОПОЛОЖЕНИЕ",
         className: "flex-1",
-        render: (_: any, row: Camera) => <span>г. Якутск, Ленина 1</span>,
+        render: () => (<span>г. Якутск, Ленина 1</span>),
       },
     ],
     defaultSort: {
