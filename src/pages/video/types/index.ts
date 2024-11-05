@@ -1,1 +1,1 @@
-export type {Camera, CamerasResponse} from './types'
+export type { Camera, CamerasResponse } from "./types";

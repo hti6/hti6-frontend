@@ -1,1 +1,1 @@
-export type {Column, Filter, TableConfig} from './types'
+export type { Column, Filter, TableConfig } from "./types";

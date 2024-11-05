@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MainLayout } from "./layouts";
 import { HomePage } from "@/pages/home";
 import { LoginPage } from "@/pages/login";
-import {ApplicationsPage} from "@/pages/applications";
-import {VideoPage} from "@/pages/video/ui/VideoPage.tsx";
+import { ApplicationsPage } from "@/pages/applications";
+import { VideoPage } from "@/pages/video/ui/VideoPage.tsx";
 
 export const Router: FC = () => {
   return (
