@@ -2,6 +2,7 @@ import { FC } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MainLayout } from "./layouts";
 import { HomePage } from "@/pages/home";
+import { LoginPage } from "@/pages/login";
 
 export const Router: FC = () => {
   return (
@@ -12,7 +13,7 @@ export const Router: FC = () => {
           <Route path="*" element={<HomePage />} />
         </Route>
         <Route path="/login">
-          <Route index element={<HomePage />} />
+          <Route index element={<LoginPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

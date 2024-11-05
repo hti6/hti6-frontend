@@ -17,3 +17,5 @@ export { NotesIcon } from "./notes.tsx";
 export { MapArrowIcon } from "./map-arrow.tsx";
 export { RouteIcon } from "./route.tsx";
 export { SolarUserRoundedIcon } from "./solar-user-rounded.tsx";
+export { SolarEyeIcon } from "./solar-eye.tsx";
+export { SolarEyeClosedIcon } from "./solar-eye-closed.tsx";
