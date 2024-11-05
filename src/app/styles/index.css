@@ -1,0 +1,1413 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* BASE */
+    /* COLOR */
+    --base-neutral: 220, 9%, 38%, 1;
+
+    --base-accent: 342, 76%, 53%, 1;
+
+    --base-success: 142, 99%, 31%, 1;
+
+    --base-warning: 36, 100%, 47%, 1;
+
+    --base-error: 354, 82%, 47%, 1;
+
+    --base-info: 207, 100%, 55%, 1;
+
+    --base-status-01: 166, 100%, 35%, 1;
+
+    --base-status-02: 194, 83%, 40%, 1;
+
+    --base-status-03: 248, 89%, 64%, 1;
+
+    --base-status-04: 272, 100%, 57%, 1;
+
+    --base-status-05: 334, 75%, 56%, 1;
+
+    --base-status-06: 20, 100%, 49%, 1;
+
+    --neutral-1000: 0, 0%, 0%, 1;
+
+    --neutral-990: 220, 8%, 8%, 1;
+
+    --neutral-950: 220, 9%, 13%, 1;
+
+    --neutral-925: 218, 10%, 16%, 1;
+
+    --neutral-900: 227, 9%, 19%, 1;
+
+    --neutral-800: 218, 9%, 23%, 1;
+
+    --neutral-700: 217, 9%, 27%, 1;
+
+    --neutral-600: 220, 9%, 33%, 1;
+
+    --neutral-500: 220, 9%, 38%, 1;
+
+    --neutral-400: 220, 6%, 51%, 1;
+
+    --neutral-300: 220, 6%, 60%, 1;
+
+    --neutral-200: 220, 6%, 69%, 1;
+
+    --neutral-100: 216, 6%, 85%, 1;
+
+    --neutral-50: 210, 6%, 94%, 1;
+
+    --neutral-25: 240, 7%, 97%, 1;
+
+    --neutral-10: 240, 11%, 98%, 1;
+
+    --neutral-0: 0, 0%, 100%, 1;
+
+    --accent-1000: 0, 0%, 0%, 1;
+
+    --accent-990: 342, 67%, 11%, 1;
+
+    --accent-950: 342, 66%, 19%, 1;
+
+    --accent-925: 342, 66%, 23%, 1;
+
+    --accent-900: 342, 66%, 27%, 1;
+
+    --accent-800: 342, 66%, 32%, 1;
+
+    --accent-700: 341, 66%, 37%, 1;
+
+    --accent-600: 342, 66%, 45%, 1;
+
+    --accent-500: 342, 76%, 53%, 1;
+
+    --accent-400: 342, 76%, 63%, 1;
+
+    --accent-300: 342, 75%, 70%, 1;
+
+    --accent-200: 341, 75%, 76%, 1;
+
+    --accent-100: 343, 76%, 88%, 1;
+
+    --accent-50: 340, 75%, 95%, 1;
+
+    --accent-25: 345, 67%, 98%, 1;
+
+    --accent-10: 348, 71%, 99%, 1;
+
+    --accent-0: 0, 0%, 100%, 1;
+
+    --success-1000: 0, 0%, 0%, 1;
+
+    --success-990: 142, 100%, 6%, 1;
+
+    --success-950: 142, 100%, 11%, 1;
+
+    --success-925: 143, 100%, 13%, 1;
+
+    --success-900: 142, 98%, 16%, 1;
+
+    --success-800: 142, 98%, 19%, 1;
+
+    --success-700: 142, 98%, 22%, 1;
+
+    --success-600: 142, 99%, 27%, 1;
+
+    --success-500: 142, 99%, 31%, 1;
+
+    --success-400: 142, 55%, 45%, 1;
+
+    --success-300: 142, 45%, 55%, 1;
+
+    --success-200: 143, 45%, 66%, 1;
+
+    --success-100: 142, 45%, 83%, 1;
+
+    --success-50: 144, 43%, 93%, 1;
+
+    --success-25: 143, 44%, 96%, 1;
+
+    --success-10: 144, 45%, 98%, 1;
+
+    --success-0: 0, 0%, 100%, 1;
+
+    --warning-1000: 0, 0%, 0%, 1;
+
+    --warning-990: 36, 100%, 9%, 1;
+
+    --warning-950: 36, 100%, 17%, 1;
+
+    --warning-925: 36, 100%, 20%, 1;
+
+    --warning-900: 36, 100%, 24%, 1;
+
+    --warning-800: 36, 100%, 28%, 1;
+
+    --warning-700: 36, 100%, 33%, 1;
+
+    --warning-600: 36, 100%, 40%, 1;
+
+    --warning-500: 36, 100%, 47%, 1;
+
+    --warning-400: 36, 91%, 58%, 1;
+
+    --warning-300: 36, 91%, 66%, 1;
+
+    --warning-200: 36, 91%, 74%, 1;
+
+    --warning-100: 35, 91%, 87%, 1;
+
+    --warning-50: 35, 92%, 95%, 1;
+
+    --warning-25: 40, 86%, 97%, 1;
+
+    --warning-10: 38, 100%, 98%, 1;
+
+    --warning-0: 0, 0%, 100%, 1;
+
+    --error-1000: 0, 0%, 0%, 1;
+
+    --error-990: 354, 83%, 9%, 1;
+
+    --error-950: 354, 83%, 16%, 1;
+
+    --error-925: 354, 82%, 20%, 1;
+
+    --error-900: 354, 82%, 24%, 1;
+
+    --error-800: 354, 82%, 28%, 1;
+
+    --error-700: 354, 82%, 33%, 1;
+
+    --error-600: 354, 82%, 40%, 1;
+
+    --error-500: 354, 82%, 47%, 1;
+
+    --error-400: 354, 72%, 57%, 1;
+
+    --error-300: 354, 72%, 65%, 1;
+
+    --error-200: 354, 72%, 73%, 1;
+
+    --error-100: 355, 73%, 87%, 1;
+
+    --error-50: 354, 70%, 95%, 1;
+
+    --error-25: 354, 71%, 97%, 1;
+
+    --error-10: 350, 75%, 98%, 1;
+
+    --error-0: 0, 0%, 100%, 1;
+
+    --info-1000: 0, 0%, 0%, 1;
+
+    --info-990: 207, 82%, 11%, 1;
+
+    --info-950: 207, 82%, 19%, 1;
+
+    --info-925: 207, 82%, 24%, 1;
+
+    --info-900: 207, 82%, 28%, 1;
+
+    --info-800: 207, 82%, 33%, 1;
+
+    --info-700: 207, 82%, 39%, 1;
+
+    --info-600: 207, 82%, 47%, 1;
+
+    --info-500: 207, 100%, 55%, 1;
+
+    --info-400: 207, 100%, 64%, 1;
+
+    --info-300: 207, 100%, 71%, 1;
+
+    --info-200: 207, 100%, 77%, 1;
+
+    --info-100: 207, 100%, 89%, 1;
+
+    --info-50: 206, 100%, 95%, 1;
+
+    --info-25: 205, 100%, 98%, 1;
+
+    --info-10: 206, 100%, 99%, 1;
+
+    --info-0: 0, 0%, 100%, 1;
+
+    --status-01-1000: 0, 0%, 0%, 1;
+
+    --status-01-990: 165, 100%, 7%, 1;
+
+    --status-01-950: 166, 100%, 12%, 1;
+
+    --status-01-925: 165, 100%, 15%, 1;
+
+    --status-01-900: 166, 100%, 17%, 1;
+
+    --status-01-800: 166, 100%, 21%, 1;
+
+    --status-01-700: 166, 100%, 25%, 1;
+
+    --status-01-600: 166, 100%, 30%, 1;
+
+    --status-01-500: 166, 100%, 35%, 1;
+
+    --status-01-400: 166, 58%, 48%, 1;
+
+    --status-01-300: 166, 54%, 58%, 1;
+
+    --status-01-200: 165, 54%, 68%, 1;
+
+    --status-01-100: 165, 54%, 84%, 1;
+
+    --status-01-50: 166, 52%, 94%, 1;
+
+    --status-01-25: 167, 53%, 97%, 1;
+
+    --status-01-10: 160, 60%, 98%, 1;
+
+    --status-01-0: 0, 0%, 100%, 1;
+
+    --status-02-1000: 0, 0%, 0%, 1;
+
+    --status-02-990: 194, 85%, 8%, 1;
+
+    --status-02-950: 194, 83%, 14%, 1;
+
+    --status-02-925: 194, 84%, 17%, 1;
+
+    --status-02-900: 195, 83%, 20%, 1;
+
+    --status-02-800: 194, 84%, 24%, 1;
+
+    --status-02-700: 195, 83%, 28%, 1;
+
+    --status-02-600: 194, 84%, 34%, 1;
+
+    --status-02-500: 194, 83%, 40%, 1;
+
+    --status-02-400: 195, 56%, 52%, 1;
+
+    --status-02-300: 195, 56%, 61%, 1;
+
+    --status-02-200: 194, 56%, 70%, 1;
+
+    --status-02-100: 194, 56%, 85%, 1;
+
+    --status-02-50: 194, 55%, 94%, 1;
+
+    --status-02-25: 193, 60%, 97%, 1;
+
+    --status-02-10: 192, 56%, 98%, 1;
+
+    --status-02-0: 0, 0%, 100%, 1;
+
+    --status-03-1000: 0, 0%, 0%, 1;
+
+    --status-03-990: 249, 51%, 13%, 1;
+
+    --status-03-950: 248, 50%, 23%, 1;
+
+    --status-03-925: 249, 50%, 27%, 1;
+
+    --status-03-900: 249, 50%, 32%, 1;
+
+    --status-03-800: 249, 50%, 38%, 1;
+
+    --status-03-700: 249, 50%, 45%, 1;
+
+    --status-03-600: 248, 59%, 55%, 1;
+
+    --status-03-500: 248, 89%, 64%, 1;
+
+    --status-03-400: 248, 89%, 71%, 1;
+
+    --status-03-300: 248, 90%, 77%, 1;
+
+    --status-03-200: 248, 89%, 82%, 1;
+
+    --status-03-100: 249, 91%, 91%, 1;
+
+    --status-03-50: 248, 89%, 96%, 1;
+
+    --status-03-25: 253, 100%, 98%, 1;
+
+    --status-03-10: 252, 100%, 99%, 1;
+
+    --status-03-0: 0, 0%, 100%, 1;
+
+    --status-04-1000: 0, 0%, 0%, 1;
+
+    --status-04-990: 273, 76%, 11%, 1;
+
+    --status-04-950: 272, 75%, 20%, 1;
+
+    --status-04-925: 272, 76%, 25%, 1;
+
+    --status-04-900: 272, 75%, 29%, 1;
+
+    --status-04-800: 272, 75%, 34%, 1;
+
+    --status-04-700: 272, 75%, 40%, 1;
+
+    --status-04-600: 272, 75%, 49%, 1;
+
+    --status-04-500: 272, 100%, 57%, 1;
+
+    --status-04-400: 272, 100%, 66%, 1;
+
+    --status-04-300: 272, 100%, 72%, 1;
+
+    --status-04-200: 272, 100%, 79%, 1;
+
+    --status-04-100: 273, 100%, 89%, 1;
+
+    --status-04-50: 273, 100%, 96%, 1;
+
+    --status-04-25: 273, 100%, 98%, 1;
+
+    --status-04-10: 274, 100%, 99%, 1;
+
+    --status-04-0: 0, 0%, 100%, 1;
+
+    --status-05-1000: 0, 0%, 0%, 1;
+
+    --status-05-990: 335, 58%, 11%, 1;
+
+    --status-05-950: 335, 60%, 19%, 1;
+
+    --status-05-925: 335, 59%, 24%, 1;
+
+    --status-05-900: 335, 59%, 28%, 1;
+
+    --status-05-800: 334, 59%, 34%, 1;
+
+    --status-05-700: 335, 59%, 39%, 1;
+
+    --status-05-600: 335, 60%, 47%, 1;
+
+    --status-05-500: 334, 75%, 56%, 1;
+
+    --status-05-400: 334, 76%, 65%, 1;
+
+    --status-05-300: 334, 75%, 71%, 1;
+
+    --status-05-200: 334, 75%, 78%, 1;
+
+    --status-05-100: 334, 75%, 89%, 1;
+
+    --status-05-50: 332, 74%, 95%, 1;
+
+    --status-05-25: 333, 82%, 98%, 1;
+
+    --status-05-10: 336, 71%, 99%, 1;
+
+    --status-05-0: 0, 0%, 100%, 1;
+
+    --status-06-1000: 0, 0%, 0%, 1;
+
+    --status-06-990: 20, 100%, 10%, 1;
+
+    --status-06-950: 20, 100%, 17%, 1;
+
+    --status-06-925: 20, 100%, 21%, 1;
+
+    --status-06-900: 20, 100%, 25%, 1;
+
+    --status-06-800: 20, 100%, 29%, 1;
+
+    --status-06-700: 20, 100%, 34%, 1;
+
+    --status-06-600: 20, 100%, 42%, 1;
+
+    --status-06-500: 20, 100%, 49%, 1;
+
+    --status-06-400: 20, 96%, 59%, 1;
+
+    --status-06-300: 20, 96%, 67%, 1;
+
+    --status-06-200: 20, 97%, 75%, 1;
+
+    --status-06-100: 20, 97%, 87%, 1;
+
+    --status-06-50: 19, 100%, 95%, 1;
+
+    --status-06-25: 18, 100%, 97%, 1;
+
+    --status-06-10: 22, 100%, 98%, 1;
+
+    --status-06-0: 0, 0%, 100%, 1;
+
+    --fg-default: 220, 8%, 8%, 1;
+
+    --fg-soft: 220, 6%, 60%, 1;
+
+    --fg-muted: 220, 6%, 69%, 1;
+
+    --fg-disabled: 220, 6%, 60%, 0.5;
+
+    --bg-surface1: 0, 0%, 100%, 1;
+
+    --bg-surface2: 240, 11%, 98%, 1;
+
+    --bg-surface3: 240, 7%, 97%, 1;
+
+    --bg-surface4: 210, 6%, 94%, 1;
+
+    --bg-surface5: 216, 6%, 85%, 1;
+
+    --bg-page: 0, 0%, 100%, 1;
+
+    --bg-disabled: 220, 9%, 38%, 0.1;
+
+    --bg-elevated-0: 0, 0%, 100%, 1;
+
+    --bg-elevated-s: 0, 0%, 100%, 1;
+
+    --bg-elevated-m: 0, 0%, 100%, 1;
+
+    --bg-elevated-l: 0, 0%, 100%, 1;
+
+    --bg-elevated-xl: 0, 0%, 100%, 1;
+
+    --border-default: 220, 9%, 38%, 0.1;
+
+    --border-soft: 220, 9%, 38%, 0.08;
+
+    --border-muted: 220, 9%, 38%, 0.04;
+
+    --accent-default: 342, 76%, 53%, 1;
+
+    --accent-soft: 342, 76%, 63%, 1;
+
+    --accent-muted: 341, 75%, 76%, 1;
+
+    --accent-hover: 342, 66%, 45%, 1;
+
+    --accent-active: 341, 66%, 37%, 1;
+
+    --accent-on-accent: 0, 0%, 100%, 1;
+
+    --accent-container-default: 342, 76%, 53%, 0.1;
+
+    --accent-container-soft: 342, 76%, 53%, 0.05;
+
+    --accent-container-muted: 342, 76%, 53%, 0.03;
+
+    --accent-container-hover: 342, 76%, 53%, 0.2;
+
+    --accent-container-active: 342, 76%, 53%, 0.3;
+
+    --accent-on-container: 342, 76%, 53%, 1;
+
+    --neutral-default: 220, 9%, 38%, 1;
+
+    --neutral-soft: 220, 6%, 51%, 1;
+
+    --neutral-muted: 220, 6%, 69%, 1;
+
+    --neutral-hover: 220, 9%, 33%, 1;
+
+    --neutral-active: 217, 9%, 27%, 1;
+
+    --neutral-on-neutral: 0, 0%, 100%, 1;
+
+    --neutral-container-default: 220, 9%, 38%, 0.05;
+
+    --neutral-container-soft: 220, 9%, 38%, 0.05;
+
+    --neutral-container-muted: 220, 9%, 38%, 0.03;
+
+    --neutral-container-hover: 220, 9%, 38%, 0.1;
+
+    --neutral-container-active: 220, 9%, 38%, 0.15;
+
+    --neutral-on-container: 220, 9%, 38%, 1;
+
+    --success-default: 142, 99%, 31%, 1;
+
+    --success-soft: 142, 55%, 45%, 1;
+
+    --success-muted: 143, 45%, 66%, 1;
+
+    --success-hover: 142, 99%, 27%, 1;
+
+    --success-active: 142, 98%, 22%, 1;
+
+    --success-on-success: 0, 0%, 100%, 1;
+
+    --success-container-default: 142, 99%, 31%, 0.1;
+
+    --success-container-soft: 142, 99%, 31%, 0.05;
+
+    --success-container-muted: 142, 99%, 31%, 0.03;
+
+    --success-container-hover: 142, 99%, 31%, 0.2;
+
+    --success-container-active: 142, 99%, 31%, 0.3;
+
+    --success-on-container: 142, 99%, 31%, 1;
+
+    --warning-default: 36, 100%, 47%, 1;
+
+    --warning-soft: 36, 91%, 58%, 1;
+
+    --warning-muted: 36, 91%, 74%, 1;
+
+    --warning-hover: 36, 100%, 40%, 1;
+
+    --warning-active: 36, 100%, 33%, 1;
+
+    --warning-on-warning: 36, 100%, 9%, 1;
+
+    --warning-container-default: 36, 100%, 47%, 0.1;
+
+    --warning-container-soft: 36, 100%, 47%, 0.05;
+
+    --warning-container-muted: 36, 100%, 47%, 0.03;
+
+    --warning-container-hover: 36, 100%, 47%, 0.2;
+
+    --warning-container-active: 36, 100%, 47%, 0.3;
+
+    --warning-on-container: 36, 100%, 40%, 1;
+
+    --error-default: 354, 82%, 47%, 1;
+
+    --error-soft: 354, 72%, 57%, 1;
+
+    --error-muted: 354, 72%, 73%, 1;
+
+    --error-hover: 354, 82%, 40%, 1;
+
+    --error-active: 354, 82%, 33%, 1;
+
+    --error-on-error: 0, 0%, 100%, 1;
+
+    --error-container-default: 354, 82%, 47%, 0.1;
+
+    --error-container-soft: 354, 82%, 47%, 0.05;
+
+    --error-container-muted: 354, 82%, 47%, 0.03;
+
+    --error-container-hover: 354, 82%, 47%, 0.2;
+
+    --error-container-active: 354, 82%, 47%, 0.3;
+
+    --error-on-container: 354, 82%, 47%, 1;
+
+    --info-default: 207, 100%, 55%, 1;
+
+    --info-soft: 207, 100%, 64%, 1;
+
+    --info-muted: 207, 100%, 77%, 1;
+
+    --info-hover: 207, 82%, 47%, 1;
+
+    --info-active: 207, 82%, 39%, 1;
+
+    --info-on-info: 0, 0%, 100%, 1;
+
+    --info-container-default: 207, 100%, 55%, 0.1;
+
+    --info-container-soft: 207, 100%, 55%, 0.05;
+
+    --info-container-muted: 207, 100%, 55%, 0.03;
+
+    --info-container-hover: 207, 100%, 55%, 0.2;
+
+    --info-container-active: 207, 100%, 55%, 0.3;
+
+    --info-on-container: 207, 100%, 55%, 1;
+
+    --status-01-default: 166, 100%, 35%, 1;
+
+    --status-01-soft: 166, 58%, 48%, 1;
+
+    --status-01-muted: 165, 54%, 68%, 1;
+
+    --status-01-hover: 166, 100%, 30%, 1;
+
+    --status-01-active: 166, 100%, 25%, 1;
+
+    --status-01-on-status-01: 0, 0%, 100%, 1;
+
+    --status-01-container-default: 166, 100%, 35%, 0.1;
+
+    --status-01-container-soft: 166, 100%, 35%, 0.05;
+
+    --status-01-container-muted: 166, 100%, 35%, 0.03;
+
+    --status-01-container-hover: 166, 100%, 35%, 0.2;
+
+    --status-01-container-active: 166, 100%, 35%, 0.3;
+
+    --status-01-on-container: 166, 100%, 35%, 1;
+
+    --status-02-default: 194, 83%, 40%, 1;
+
+    --status-02-soft: 195, 56%, 52%, 1;
+
+    --status-02-muted: 194, 56%, 70%, 1;
+
+    --status-02-hover: 194, 84%, 34%, 1;
+
+    --status-02-active: 195, 83%, 28%, 1;
+
+    --status-02-on-status-02: 0, 0%, 100%, 1;
+
+    --status-02-container-default: 194, 83%, 40%, 0.1;
+
+    --status-02-container-soft: 194, 83%, 40%, 0.05;
+
+    --status-02-container-muted: 194, 83%, 40%, 0.03;
+
+    --status-02-container-hover: 194, 83%, 40%, 0.2;
+
+    --status-02-container-active: 194, 83%, 40%, 0.3;
+
+    --status-02-on-container: 194, 83%, 40%, 1;
+
+    --status-03-default: 248, 89%, 64%, 1;
+
+    --status-03-soft: 248, 89%, 71%, 1;
+
+    --status-03-muted: 248, 89%, 82%, 1;
+
+    --status-03-hover: 248, 59%, 55%, 1;
+
+    --status-03-active: 249, 50%, 45%, 1;
+
+    --status-03-on-status-03: 0, 0%, 100%, 1;
+
+    --status-03-container-default: 248, 89%, 64%, 0.1;
+
+    --status-03-container-soft: 248, 89%, 64%, 0.05;
+
+    --status-03-container-muted: 248, 89%, 64%, 0.03;
+
+    --status-03-container-hover: 248, 89%, 64%, 0.2;
+
+    --status-03-container-active: 248, 89%, 64%, 0.3;
+
+    --status-03-on-container: 248, 89%, 64%, 1;
+
+    --status-04-default: 272, 100%, 57%, 1;
+
+    --status-04-soft: 272, 100%, 66%, 1;
+
+    --status-04-muted: 272, 100%, 79%, 1;
+
+    --status-04-hover: 272, 75%, 49%, 1;
+
+    --status-04-active: 272, 75%, 40%, 1;
+
+    --status-04-on-status-04: 0, 0%, 100%, 1;
+
+    --status-04-container-default: 272, 100%, 57%, 0.1;
+
+    --status-04-container-soft: 272, 100%, 57%, 0.05;
+
+    --status-04-container-muted: 272, 100%, 57%, 0.03;
+
+    --status-04-container-hover: 272, 100%, 57%, 0.2;
+
+    --status-04-container-active: 272, 100%, 57%, 0.3;
+
+    --status-04-on-container: 272, 100%, 57%, 1;
+
+    --status-05-default: 334, 75%, 56%, 1;
+
+    --status-05-soft: 334, 76%, 65%, 1;
+
+    --status-05-muted: 334, 75%, 78%, 1;
+
+    --status-05-hover: 335, 60%, 47%, 1;
+
+    --status-05-active: 335, 59%, 39%, 1;
+
+    --status-05-on-status-05: 0, 0%, 100%, 1;
+
+    --status-05-container-default: 334, 75%, 56%, 0.1;
+
+    --status-05-container-soft: 334, 75%, 56%, 0.05;
+
+    --status-05-container-muted: 334, 75%, 56%, 0.03;
+
+    --status-05-container-hover: 334, 75%, 56%, 0.2;
+
+    --status-05-container-active: 334, 75%, 56%, 0.3;
+
+    --status-05-on-container: 334, 75%, 56%, 1;
+
+    --status-06-default: 20, 100%, 49%, 1;
+
+    --status-06-soft: 20, 96%, 59%, 1;
+
+    --status-06-muted: 20, 97%, 75%, 1;
+
+    --status-06-hover: 20, 100%, 42%, 1;
+
+    --status-06-active: 20, 100%, 34%, 1;
+
+    --status-06-on-status-06: 0, 0%, 100%, 1;
+
+    --status-06-container-default: 20, 100%, 49%, 0.1;
+
+    --status-06-container-soft: 20, 100%, 49%, 0.05;
+
+    --status-06-container-muted: 20, 100%, 49%, 0.03;
+
+    --status-06-container-hover: 20, 100%, 49%, 0.2;
+
+    --status-06-container-active: 20, 100%, 49%, 0.3;
+
+    --status-06-on-container: 20, 100%, 49%, 1;
+
+    --static-white: 0, 0%, 100%, 1;
+
+    --static-black: 220, 24%, 7%, 1;
+
+    /* TYPOGRAPHY */
+    --font-family-base: Inter;
+
+    --font-size-base: 1rem;
+
+    --font-line-height-base: 1rem;
+
+    /* TYPOGRAPHY DISPLAY */
+    --font-family-display: Oswald;
+
+    --font-weight-display-strong: 700;
+
+    --font-weight-display: 500;
+
+    --font-size-display-l: 3rem;
+
+    --font-line-height-display-l: 3.25rem;
+
+    --font-size-display-m: 2.625rem;
+
+    --font-line-height-display-m: 2.75rem;
+
+    --font-size-display-s: 2rem;
+
+    --font-line-height-display-s: 2.75rem;
+
+    /* TYPOGRAPHY HEADING */
+    --font-family-heading: Oswald;
+
+    --font-weight-heading: 700;
+
+    --font-size-heading-h1: 1.75rem;
+
+    --font-line-height-heading-h1: 2rem;
+
+    --font-size-heading-h2: 1.375rem;
+
+    --font-line-height-heading-h2: 1.5rem;
+
+    --font-size-heading-h3: 1.125rem;
+
+    --font-line-height-heading-h3: 1.25rem;
+
+    --font-size-heading-h4: 1rem;
+
+    --font-line-height-heading-h4: 1.25rem;
+
+    --font-size-heading-h5: 0.875rem;
+
+    --font-line-height-heading-h5: 1.25rem;
+
+    /* TYPOGRAPHY BODY */
+    --font-family-body: Inter;
+
+    --font-weight-body-strong: 600;
+
+    --font-weight-body: 400;
+
+    --font-size-body-l: 1.125rem;
+
+    --font-line-height-body-l: 1.625rem;
+
+    --font-size-body-m: 1rem;
+
+    --font-line-height-body-m: 1.5rem;
+
+    --font-size-body-s: 0.875rem;
+
+    --font-line-height-body-s: 1.25rem;
+
+    /* TYPOGRAPHY DESCRIPTION */
+    --font-family-description: Inter;
+
+    --font-weight-description-strong: 600;
+
+    --font-weight-description: 400;
+
+    --font-size-description-l: 0.75rem;
+
+    --font-line-height-description-l: 1rem;
+
+    --font-letter-spacing-description-m: 0.0125rem;
+
+    --font-size-description-m: 0.688rem;
+
+    --font-line-height-description-m: 1rem;
+
+    --font-letter-spacing-description-s: 0.025rem;
+
+    --font-size-description-s: 0.625rem;
+
+    --font-line-height-description-s: 0.75rem;
+
+    /* SHADOW */
+    --shadow-button-ring: 0 0 0 2px var(--tw-shadow-color, hsla(0, 0, 0, 0));
+
+    --shadow-bottom-small: 0 2px 4px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 8px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-bottom-medium: 0 4px 8px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 16px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-bottom-large: 0 12px 20px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 20px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-bottom-extra-large: 0 32px 32px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 32px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-bottom-controls: 0 2px 2px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 1px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-bottom-accent-small: 0 0px 8px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft))),
+      0 2px 4px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft)));
+
+    --shadow-bottom-accent-medium: 0 0 16px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft))),
+      0 4px 8px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft)));
+
+    --shadow-bottom-accent-large: 0 0 20px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft))),
+      0 12px 20px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft)));
+
+    --shadow-bottom-accent-extra-large: 0 0 32px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft))),
+      0 32px 32px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft)));
+
+    --shadow-bottom-accent-controls: 0 0 1px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft))),
+      0 2px 2px 0 var(--tw-shadow-color, hsla(var(--accent-container-soft)));
+
+    --shadow-top-small: 0 -2px 4px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 8px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-top-medium: 0 -4px 8px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 16px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-top-large: 0 -12px 20px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 20px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-top-extra-large: 0 -32px 32px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 32px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    --shadow-top-controls: 0 -2px 2px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft))),
+      0 0 1px 0 var(--tw-shadow-color, hsla(var(--neutral-container-soft)));
+
+    /* BORDER */
+    --border-radius-base: 0;
+
+    --border-radius-none: 0;
+
+    --border-radius-full: 9999px;
+
+    --border-radius-2xs: 4px;
+
+    --border-radius-xs: 8px;
+
+    --border-radius-s: 11px;
+
+    --border-radius-m: 16px;
+
+    --border-radius-l: 24px;
+
+    --border-radius-xl: 32px;
+
+    --border-radius-2xl: 64px;
+
+    --border-radius-inputs: 16px;
+
+    --border-radius-buttons: 16px;
+
+    --border-radius-controls: 4px;
+
+    /* BORDER WIDTH */
+    --border-width-none: 0;
+
+    --border-width-s: 1px;
+
+    --border-width-m: 2px;
+
+    --border-width-l: 4px;
+
+    --border-width-inputs: 2px;
+
+    --border-width-buttons: 2px;
+
+    --border-width-controls: 2px;
+
+    --border-width-dividers: 1px;
+
+    /* SPACING */
+    --spacing-base: 16px;
+
+    --spacing-none: 0;
+
+    --spacing-px: 1px;
+
+    --spacing-0-5x: 2px;
+
+    --spacing-1x: 4px;
+
+    --spacing-1-5x: 6px;
+
+    --spacing-2x: 8px;
+
+    --spacing-3x: 12px;
+
+    --spacing-4x: 16px;
+
+    --spacing-5x: 20px;
+
+    --spacing-6x: 24px;
+
+    --spacing-8x: 32px;
+
+    --spacing-10x: 40px;
+
+    --spacing-12x: 48px;
+
+    --spacing-16x: 64px;
+
+    --spacing-20x: 80px;
+
+    --spacing-24x: 96px;
+
+    --spacing-32x: 128px;
+
+    --spacing-48x: 192px;
+
+    /* SIZE */
+    --size-base: 16px;
+
+    --size-xl: 56px;
+
+    --size-l: 48px;
+
+    --size-m: 36px;
+
+    --size-m-chip: 32px;
+
+    --size-m-tag: 28px;
+
+    --size-s: 24px;
+
+    --size-xs: 20px;
+
+    --size-2xs: 16px;
+
+    /* BREAKPOINT */
+    --breakpoint-2xs: 0;
+
+    --breakpoint-xs: 480px;
+
+    --breakpoint-s: 768px;
+
+    --breakpoint-m: 1024px;
+
+    --breakpoint-l: 1280px;
+
+    --breakpoint-xl: 1600px;
+
+    /* Z-INDEX */
+    --z-index-hide: -1;
+
+    --z-index-default: 0;
+
+    --z-index-dropdown: 1000;
+
+    --z-index-sticky: 1100;
+
+    --z-index-fab: 1200;
+
+    --z-index-overlay: 1300;
+
+    --z-index-loader: 1400;
+
+    --z-index-modal: 1500;
+
+    --z-index-toast: 1600;
+
+    --z-index-popover: 1700;
+
+    --z-index-tooltip: 1800;
+
+    /* MOTION */
+    --motion-duration-2xs: 100ms;
+
+    --motion-duration-xs: 150ms;
+
+    --motion-duration-s: 200ms;
+
+    --motion-duration-m: 300ms;
+
+    --motion-duration-l: 600ms;
+
+    --motion-duration-xl: 1200ms;
+
+    --motion-easing-linear: cubic-bezier(0, 0, 1, 1);
+
+    --motion-easing-productive-standart: cubic-bezier(0.4, 0, 0.6, 1);
+
+    --motion-easing-expressive-standart: cubic-bezier(0.8, 0, 0.2, 1);
+
+    --motion-easing-productive-entrance: cubic-bezier(0, 0, 0.6, 1);
+
+    --motion-easing-expressive-entrance: cubic-bezier(0, 0, 0.3, 1);
+
+    --motion-easing-productive-exit: cubic-bezier(0.3, 0, 1, 0.9);
+
+    --motion-easing-expressive-exit: cubic-bezier(0.8, 0.15, 1, 1);
+
+    --motion-easing-productive-bouncing: cubic-bezier(0.18, 0.89, 0.35, 1.15);
+
+    --motion-easing-expressive-bouncing: cubic-bezier(0.7, 0.3, 0.5, 1.25);
+  }
+
+  .dark {
+    --fg-default: 210, 6%, 94%, 1;
+
+    --fg-soft: 220, 6%, 69%, 1;
+
+    --fg-muted: 220, 6%, 60%, 1;
+
+    --fg-disabled: 220, 6%, 69%, 0.5;
+
+    --bg-surface1: 220, 9%, 13%, 1;
+
+    --bg-surface2: 218, 10%, 16%, 1;
+
+    --bg-surface3: 227, 9%, 19%, 1;
+
+    --bg-surface4: 218, 9%, 23%, 1;
+
+    --bg-surface5: 217, 9%, 27%, 1;
+
+    --bg-page: 220, 9%, 13%, 1;
+
+    --bg-disabled: 220, 6%, 69%, 0.1;
+
+    --bg-elevated-0: 220, 9%, 13%, 1;
+
+    --bg-elevated-s: 218, 10%, 16%, 1;
+
+    --bg-elevated-m: 227, 9%, 19%, 1;
+
+    --bg-elevated-l: 218, 9%, 23%, 1;
+
+    --bg-elevated-xl: 217, 9%, 27%, 1;
+
+    --border-default: 220, 6%, 69%, 0.1;
+
+    --border-soft: 220, 6%, 69%, 0.08;
+
+    --border-muted: 220, 6%, 69%, 0.04;
+
+    --accent-default: 341, 75%, 76%, 1;
+
+    --accent-soft: 342, 75%, 70%, 1;
+
+    --accent-muted: 342, 76%, 63%, 1;
+
+    --accent-hover: 343, 76%, 88%, 1;
+
+    --accent-active: 340, 75%, 95%, 1;
+
+    --accent-on-accent: 342, 66%, 19%, 1;
+
+    --accent-container-default: 342, 76%, 63%, 0.2;
+
+    --accent-container-soft: 342, 76%, 63%, 0.1;
+
+    --accent-container-muted: 342, 76%, 63%, 0.05;
+
+    --accent-container-hover: 342, 76%, 63%, 0.3;
+
+    --accent-container-active: 342, 76%, 63%, 0.4;
+
+    --accent-on-container: 341, 75%, 76%, 1;
+
+    --neutral-default: 220, 6%, 69%, 1;
+
+    --neutral-soft: 220, 6%, 60%, 1;
+
+    --neutral-muted: 220, 6%, 51%, 1;
+
+    --neutral-hover: 216, 6%, 85%, 1;
+
+    --neutral-active: 210, 6%, 94%, 1;
+
+    --neutral-on-neutral: 220, 9%, 13%, 1;
+
+    --neutral-container-default: 220, 6%, 51%, 0.2;
+
+    --neutral-container-soft: 220, 6%, 51%, 0.1;
+
+    --neutral-container-muted: 220, 6%, 51%, 0.05;
+
+    --neutral-container-hover: 220, 6%, 51%, 0.3;
+
+    --neutral-container-active: 220, 6%, 51%, 0.4;
+
+    --neutral-on-container: 220, 6%, 69%, 1;
+
+    --success-default: 143, 45%, 66%, 1;
+
+    --success-soft: 142, 45%, 55%, 1;
+
+    --success-muted: 142, 55%, 45%, 1;
+
+    --success-hover: 142, 45%, 83%, 1;
+
+    --success-active: 144, 43%, 93%, 1;
+
+    --success-on-success: 142, 100%, 11%, 1;
+
+    --success-container-default: 142, 55%, 45%, 0.2;
+
+    --success-container-soft: 142, 55%, 45%, 0.1;
+
+    --success-container-muted: 142, 55%, 45%, 0.05;
+
+    --success-container-hover: 142, 55%, 45%, 0.3;
+
+    --success-container-active: 142, 55%, 45%, 0.4;
+
+    --success-on-container: 143, 45%, 66%, 1;
+
+    --warning-default: 36, 91%, 74%, 1;
+
+    --warning-soft: 36, 91%, 66%, 1;
+
+    --warning-muted: 36, 91%, 58%, 1;
+
+    --warning-hover: 35, 91%, 87%, 1;
+
+    --warning-active: 35, 92%, 95%, 1;
+
+    --warning-on-warning: 36, 100%, 9%, 1;
+
+    --warning-container-default: 36, 91%, 58%, 0.2;
+
+    --warning-container-soft: 36, 91%, 58%, 0.1;
+
+    --warning-container-muted: 36, 91%, 58%, 0.05;
+
+    --warning-container-hover: 36, 91%, 58%, 0.3;
+
+    --warning-container-active: 36, 91%, 58%, 0.4;
+
+    --warning-on-container: 36, 91%, 74%, 1;
+
+    --error-default: 354, 72%, 73%, 1;
+
+    --error-soft: 354, 72%, 65%, 1;
+
+    --error-muted: 354, 72%, 57%, 1;
+
+    --error-hover: 355, 73%, 87%, 1;
+
+    --error-active: 354, 70%, 95%, 1;
+
+    --error-on-error: 354, 83%, 16%, 1;
+
+    --error-container-default: 354, 72%, 57%, 0.2;
+
+    --error-container-soft: 354, 72%, 57%, 0.1;
+
+    --error-container-muted: 354, 72%, 57%, 0.05;
+
+    --error-container-hover: 354, 72%, 57%, 0.3;
+
+    --error-container-active: 354, 72%, 57%, 0.4;
+
+    --error-on-container: 354, 72%, 73%, 1;
+
+    --info-default: 207, 100%, 77%, 1;
+
+    --info-soft: 207, 100%, 71%, 1;
+
+    --info-muted: 207, 100%, 64%, 1;
+
+    --info-hover: 207, 100%, 89%, 1;
+
+    --info-active: 206, 100%, 95%, 1;
+
+    --info-on-info: 207, 82%, 19%, 1;
+
+    --info-container-default: 207, 100%, 64%, 0.2;
+
+    --info-container-soft: 207, 100%, 64%, 0.1;
+
+    --info-container-muted: 207, 100%, 64%, 0.05;
+
+    --info-container-hover: 207, 100%, 64%, 0.3;
+
+    --info-container-active: 207, 100%, 64%, 0.4;
+
+    --info-on-container: 207, 100%, 77%, 1;
+
+    --status-01-default: 166, 53%, 67%, 1;
+
+    --status-01-soft: 166, 54%, 58%, 1;
+
+    --status-01-muted: 166, 58%, 48%, 1;
+
+    --status-01-hover: 165, 54%, 84%, 1;
+
+    --status-01-active: 166, 52%, 94%, 1;
+
+    --status-01-on-status-01: 166, 100%, 12%, 1;
+
+    --status-01-container-default: 166, 58%, 48%, 0.2;
+
+    --status-01-container-soft: 166, 58%, 48%, 0.1;
+
+    --status-01-container-muted: 166, 58%, 48%, 0.05;
+
+    --status-01-container-hover: 166, 58%, 48%, 0.3;
+
+    --status-01-container-active: 166, 58%, 48%, 0.4;
+
+    --status-01-on-container: 166, 53%, 67%, 1;
+
+    --status-02-default: 195, 56%, 70%, 1;
+
+    --status-02-soft: 195, 56%, 61%, 1;
+
+    --status-02-muted: 195, 56%, 52%, 1;
+
+    --status-02-hover: 194, 55%, 85%, 1;
+
+    --status-02-active: 194, 55%, 94%, 1;
+
+    --status-02-on-status-02: 195, 83%, 14%, 1;
+
+    --status-02-container-default: 195, 56%, 52%, 0.2;
+
+    --status-02-container-soft: 195, 56%, 52%, 0.1;
+
+    --status-02-container-muted: 195, 56%, 52%, 0.05;
+
+    --status-02-container-hover: 195, 56%, 52%, 0.3;
+
+    --status-02-container-active: 195, 56%, 52%, 0.4;
+
+    --status-02-on-container: 195, 56%, 70%, 1;
+
+    --status-03-default: 248, 89%, 82%, 1;
+
+    --status-03-soft: 248, 90%, 77%, 1;
+
+    --status-03-muted: 248, 89%, 71%, 1;
+
+    --status-03-hover: 249, 87%, 91%, 1;
+
+    --status-03-active: 248, 89%, 96%, 1;
+
+    --status-03-on-status-03: 248, 50%, 23%, 1;
+
+    --status-03-container-default: 248, 89%, 71%, 0.2;
+
+    --status-03-container-soft: 248, 89%, 71%, 0.1;
+
+    --status-03-container-muted: 248, 89%, 71%, 0.05;
+
+    --status-03-container-hover: 248, 89%, 71%, 0.3;
+
+    --status-03-container-active: 248, 89%, 71%, 0.4;
+
+    --status-03-on-container: 248, 89%, 82%, 1;
+
+    --status-04-default: 272, 100%, 79%, 1;
+
+    --status-04-soft: 272, 100%, 72%, 1;
+
+    --status-04-muted: 272, 100%, 66%, 1;
+
+    --status-04-hover: 273, 100%, 89%, 1;
+
+    --status-04-active: 273, 100%, 96%, 1;
+
+    --status-04-on-status-04: 272, 75%, 20%, 1;
+
+    --status-04-container-default: 272, 100%, 66%, 0.2;
+
+    --status-04-container-soft: 272, 100%, 66%, 0.1;
+
+    --status-04-container-muted: 272, 100%, 66%, 0.05;
+
+    --status-04-container-hover: 272, 100%, 66%, 0.3;
+
+    --status-04-container-active: 272, 100%, 66%, 0.4;
+
+    --status-04-on-container: 272, 100%, 79%, 1;
+
+    --status-05-default: 334, 75%, 78%, 1;
+
+    --status-05-soft: 334, 75%, 71%, 1;
+
+    --status-05-muted: 334, 76%, 65%, 1;
+
+    --status-05-hover: 334, 75%, 89%, 1;
+
+    --status-05-active: 332, 74%, 95%, 1;
+
+    --status-05-on-status-05: 335, 60%, 20%, 1;
+
+    --status-05-container-default: 334, 76%, 65%, 0.2;
+
+    --status-05-container-soft: 334, 76%, 65%, 0.1;
+
+    --status-05-container-muted: 334, 76%, 65%, 0.05;
+
+    --status-05-container-hover: 334, 76%, 65%, 0.3;
+
+    --status-05-container-active: 334, 76%, 65%, 0.4;
+
+    --status-05-on-container: 334, 75%, 78%, 1;
+
+    --status-06-default: 20, 95%, 75%, 1;
+
+    --status-06-soft: 20, 96%, 67%, 1;
+
+    --status-06-muted: 20, 96%, 59%, 1;
+
+    --status-06-hover: 20, 97%, 87%, 1;
+
+    --status-06-active: 20, 92%, 95%, 1;
+
+    --status-06-on-status-06: 20, 100%, 17%, 1;
+
+    --status-06-container-default: 20, 96%, 59%, 0.2;
+
+    --status-06-container-soft: 20, 96%, 59%, 0.1;
+
+    --status-06-container-muted: 20, 96%, 59%, 0.05;
+
+    --status-06-container-hover: 20, 96%, 59%, 0.3;
+
+    --status-06-container-active: 20, 96%, 59%, 0.4;
+
+    --status-06-on-container: 20, 95%, 75%, 1;
+  }
+}
+
+body {
+  background-color: hsla(var(--bg-surface3));
+}
