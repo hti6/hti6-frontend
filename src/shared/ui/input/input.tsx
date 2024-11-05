@@ -1,4 +1,4 @@
-import { IMaskInput } from "react-imask";
+// import { IMaskInput } from "react-imask";
 import {
   FC,
   forwardRef,
@@ -10,7 +10,7 @@ import { cn } from "@/shared/lib/utils";
 import { SolarEyeIcon, SolarEyeClosedIcon, IconProps } from "@/shared/icons";
 import { Button, FunctionButton, IconButton } from "../button";
 import { PopoverTrigger } from "../popover";
-import { InputMask, MaskedDate } from "imask";
+// import { InputMask, MaskedDate } from "imask";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   withAsterisk?: boolean;
