@@ -1,1 +1,1 @@
-export { Input, PasswordInput, MaskInput } from './input.tsx';
+export { Input, PasswordInput } from "./input.tsx";
