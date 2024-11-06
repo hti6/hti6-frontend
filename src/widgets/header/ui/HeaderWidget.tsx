@@ -2,7 +2,7 @@ import { SolarNotificationBellIcon } from "@/shared/icons";
 import { SolarUserRoundedIcon } from "@/shared/icons/solar-user-rounded";
 import { cn } from "@/shared/lib/utils";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
-import { IconButton } from "@/shared/ui/button";
+import { Button, IconButton } from "@/shared/ui/button";
 import { FC } from "react";
 import { useLocation } from "react-router-dom";
 import {
@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shared/ui/dialog";
+import { useUser } from "@/app/providers";
 
 function getLabelByRoute(route: string): string {
   switch (route) {
@@ -34,6 +35,7 @@ function getApplications(): { status: string; count: number }[] {
 }
 
 export const HeaderWidget: FC = () => {
+  const { logout } = useUser();
   const location = useLocation();
   return (
     <header className="mb-2">
@@ -103,7 +105,9 @@ export const HeaderWidget: FC = () => {
                   нейро <span className="text-accent">профиль</span>
                 </DialogTitle>
               </DialogHeader>
-              <div className="flex-1">hey</div>
+              <div className="flex-1">
+                <Button onClick={logout}>logout</Button>
+              </div>
             </DialogContent>
           </Dialog>
         </div>

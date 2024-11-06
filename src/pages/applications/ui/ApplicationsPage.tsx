@@ -17,16 +17,16 @@ export const ApplicationsPage = () => {
         title: "СРОЧНОСТЬ",
         sortable: true,
         render: (value: string | number | Category[]) => (
-            <span>
-              {value == "critical"
-                ? "Критический"
-                : value === "high"
-                  ? "Высокий"
-                  : value === "middle"
-                    ? "Средний"
-                    : "Низкий"}
-            </span>
-          )
+          <span>
+            {value == "critical"
+              ? "Критический"
+              : value === "high"
+                ? "Высокий"
+                : value === "middle"
+                  ? "Средний"
+                  : "Низкий"}
+          </span>
+        ),
       },
       {
         key: "latitude",
@@ -42,8 +42,7 @@ export const ApplicationsPage = () => {
         title: "ТИП ПОВРЕЖДЕНИЯ",
         render: (categories: string | number | Category[]) => (
           <div className="flex flex-wrap gap-1">
-            {Array.isArray(categories) &&
-              categories.length > 0 ? (
+            {Array.isArray(categories) && categories.length > 0 ? (
               categories.map((category) => (
                 <span
                   key={category.id}

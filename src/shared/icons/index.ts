@@ -12,6 +12,7 @@ export { ExampleLogoIcon } from "./example-logo.tsx";
 export { SolarHamburgerMenuIcon } from "./solar-hamburger-menu.tsx";
 export { SolarNotificationBellIcon } from "./solar-notification-bell.tsx";
 export { LogoIcon } from "./logo.tsx";
+export { LogoIcon48 } from "./logo.tsx";
 export { MainIcon } from "./main.tsx";
 export { VideoCameraIcon } from "./video-camera.tsx";
 export { NotesIcon } from "./notes.tsx";

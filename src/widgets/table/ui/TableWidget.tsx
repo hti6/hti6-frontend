@@ -1,8 +1,9 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, useCallback } from "react";
 import { AddSmall, RemoveSmall, Search } from "@atomaro/icons";
 import { SolarSort } from "@/shared/icons";
 import { Filter, TableConfig } from "../types";
 import { cn } from "@/shared/lib/utils";
+import { useUser } from "@/app/providers";
 
 interface TableWidgetProps<T> {
   config: TableConfig<T>;
@@ -24,57 +25,54 @@ interface QueryParams {
   filter?: string;
 }
 
-const fetchTableData = async <T, R = never>(
-  endpoint: string,
-  params: QueryParams,
-  transform?: (response: R) => {
-    result: T[];
-    meta: {
-      current_page: number;
-      total: number;
-      per_page: number;
-    };
-  },
-): Promise<{
-  result: T[];
-  meta: {
-    current_page: number;
-    total: number;
-    per_page: number;
-  };
-}> => {
-  // const token = localStorage.getItem('token');
-  const token = "1|8CYZcbkqiX7PuWLcKgOwfQaPT9UU3SQo46dooGgzb2fd870a";
-  if (!token) {
-    throw new Error("Не авторизован");
-  }
-
-  const queryParams = new URLSearchParams();
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined) {
-      queryParams.append(key, value.toString());
-    }
-  });
-
-  const response = await fetch(`${endpoint}?${queryParams}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("Пусто");
-  }
-
-  const responseData = await response.json();
-
-  if (transform) {
-    return transform(responseData);
-  }
-
-  return responseData;
-};
+//const fetchTableData = async <T, R = never>(
+//  endpoint: string,
+//  params: QueryParams,
+//  token?: string,
+//  transform?: (response: R) => {
+//    result: T[];
+//    meta: {
+//      current_page: number;
+//      total: number;
+//      per_page: number;
+//    };
+//  },
+//): Promise<{
+//  result: T[];
+//  meta: {
+//    current_page: number;
+//    total: number;
+//    per_page: number;
+//  };
+//}> => {
+//  const queryParams = new URLSearchParams();
+//  Object.entries(params).forEach(([key, value]) => {
+//    if (value !== undefined) {
+//      queryParams.append(key, value.toString());
+//    }
+//  });
+//
+//  const response = await fetch(`${endpoint}?${queryParams}`, {
+//    headers: {
+//      Authorization: `Bearer ${token}`,
+//      "Content-Type": "application/json",
+//    },
+//  });
+//
+//  console.log(endpoint, queryParams, token, response.status);
+//
+//  if (response.status !== 200) {
+//    throw new Error("Пусто");
+//  }
+//
+//  const responseData = await response.json();
+//
+//  if (transform) {
+//    return transform(responseData);
+//  }
+//
+//  return responseData;
+//};
 
 interface TableHeaderProps {
   onSearch: (value: string) => void;
@@ -146,6 +144,7 @@ export function TableWidget<T>({
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { token } = useUser();
 
   const [queryParams, setQueryParams] = useState<QueryParams>({
     first: config.perPageOptions?.[0] ?? 15,
@@ -156,24 +155,57 @@ export function TableWidget<T>({
 
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const loadData = useCallback(async () => {
+    try {
+      if (!token) {
+        throw new Error("No Token");
+      }
+      setLoading(true);
+      //const response = await fetchTableData<T>(
+      //  config.endpoint,
+      //  queryParams,
+      //  token,
+      //);
+      //
+      const qp = new URLSearchParams();
+      Object.entries(queryParams).forEach(([key, value]) => {
+        if (value !== undefined) {
+          qp.append(key, value.toString());
+        }
+      });
+
+      const response = await fetch(`${config.endpoint}?${qp}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      //if (response.status !== 200) {
+      //  throw new Error("Пусто");
+      //}
+
+      const responseData = await response.json();
+      console.log(responseData);
+
+      //if (transform) {
+      //  return transform(responseData);
+      //}
+
+      setData(responseData.result);
+      setTotal(responseData.meta.total);
+      setCurrentPage(responseData.meta.current_page);
+    } catch (err) {
+      console.log(err);
+      setError(err instanceof Error ? err.message : "Пусто");
+    } finally {
+      setLoading(false);
+    }
+  }, [queryParams, config.endpoint, token]);
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetchTableData<T>(config.endpoint, queryParams);
-        setData(response.result);
-        setTotal(response.meta.total);
-        setCurrentPage(response.meta.current_page);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Пусто");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, [queryParams, config.endpoint]);
+    if (token) loadData();
+  }, [loadData, token]);
 
   const handleSort = (field: string) => {
     setQueryParams((prev) => ({
