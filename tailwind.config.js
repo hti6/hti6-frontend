@@ -73,34 +73,54 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "popover-enter": {
+        "opacity-enter": {
           from: { opacity: "0" },
           to: { opacity: "100" },
         },
-        "popover-exit": {
+        "opacity-exit": {
           from: { opacity: "100" },
           to: { opacity: "0" },
         },
-        "dropdown-enter": {
-          from: { opacity: "0" },
-          to: { opacity: "100" },
+        "dialog-enter-full": {
+          from: {
+            transform: "translateX(100%)",
+          },
+          to: {
+            transform: "translateX(0%)",
+          },
         },
-        "dropdown-exit": {
-          from: { opacity: "100" },
-          to: { opacity: "0" },
+        "dialog-exit-full": {
+          from: {
+            transform: "translateX(0%)",
+          },
+          to: {
+            transform: "translateX(100%)",
+          },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "popover-enter":
-          "popover-enter var(--motion-duration-xs) var(--motion-easing-productive-entrance)",
+          "opacity-enter var(--motion-duration-xs) var(--motion-easing-productive-entrance)",
         "popover-exit":
-          "popover-exit var(--motion-duration-xs) var(--motion-easing-productive-exit)",
+          "opacity-exit var(--motion-duration-xs) var(--motion-easing-productive-exit)",
         "dropdown-enter":
-          "dropdown-enter var(--motion-duration-xs) var(--motion-easing-productive-entrance)",
+          "opacity-enter var(--motion-duration-xs) var(--motion-easing-productive-entrance)",
         "dropdown-exit":
-          "dropdown-exit var(--motion-duration-xs) var(--motion-easing-productive-exit)",
+          "opacity-exit var(--motion-duration-xs) var(--motion-easing-productive-exit)",
+        "overlay-enter":
+          "opacity-enter var(--motion-duration-xs) var(--motion-easing-productive-entrance)",
+        "overlay-exit":
+          "opacity-exit var(--motion-duration-xs) var(--motion-easing-productive-exit)",
+        "dialog-enter-full":
+          "dialog-enter-full var(--motion-duration-m) var(--motion-easing-expressive-entrance)",
+        "dialog-exit-full":
+          "dialog-exit-full var(--motion-duration-m) var(--motion-easing-expressive-exit)",
+        "dialog-enter":
+          "opacity-enter var(--motion-duration-xs) var(--motion-easing-productive-entrance)",
+        "dialog-exit":
+          "opacity-exit var(--motion-duration-xs) var(--motion-easing-productive-exit)",
       },
     },
     borderRadius: {

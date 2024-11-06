@@ -5,6 +5,13 @@ import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import { IconButton } from "@/shared/ui/button";
 import { FC } from "react";
 import { useLocation } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/shared/ui/dialog";
 
 function getLabelByRoute(route: string): string {
   switch (route) {
@@ -60,21 +67,45 @@ export const HeaderWidget: FC = () => {
           </h1>
         )}
         <div className="flex gap-2">
-          <IconButton variant="secondary" color="neutral" size="lg">
-            <SolarNotificationBellIcon />
-          </IconButton>
-          <Avatar>
-            <AvatarFallback>
-              <IconButton
-                className="p-2 py-[7.5px]"
-                variant="secondary"
-                color="neutral"
-                size="lg"
-              >
-                <SolarUserRoundedIcon />
+          <Dialog>
+            <DialogTrigger asChild>
+              <IconButton variant="secondary" color="neutral" size="lg">
+                <SolarNotificationBellIcon />
               </IconButton>
-            </AvatarFallback>
-          </Avatar>
+            </DialogTrigger>
+            <DialogContent full>
+              <DialogHeader full>
+                <DialogTitle full>
+                  нейро <span className="text-accent">уведомления</span>
+                </DialogTitle>
+              </DialogHeader>
+              <div className="flex-1">hey</div>
+            </DialogContent>
+          </Dialog>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Avatar>
+                <AvatarFallback>
+                  <IconButton
+                    className="p-2 py-[7.5px]"
+                    variant="secondary"
+                    color="neutral"
+                    size="lg"
+                  >
+                    <SolarUserRoundedIcon />
+                  </IconButton>
+                </AvatarFallback>
+              </Avatar>
+            </DialogTrigger>
+            <DialogContent full>
+              <DialogHeader full>
+                <DialogTitle full>
+                  нейро <span className="text-accent">профиль</span>
+                </DialogTitle>
+              </DialogHeader>
+              <div className="flex-1">hey</div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </header>
