@@ -21,3 +21,7 @@ export { RouteIcon } from "./route.tsx";
 export { SolarUserRoundedIcon } from "./solar-user-rounded.tsx";
 export { SolarEyeIcon } from "./solar-eye.tsx";
 export { SolarEyeClosedIcon } from "./solar-eye-closed.tsx";
+export { SolarCalendar } from "./solar-calendar.tsx";
+export { SolarPriority } from "./solar-priority.tsx";
+export { SolarMap } from "./solar-map.tsx";
+export { SolarTarget } from "./solar-target.tsx";

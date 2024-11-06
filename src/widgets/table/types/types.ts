@@ -1,9 +1,12 @@
+import {ReactNode} from "react";
+import {ButtonVariant} from "@/shared/ui/button/button.tsx";
+
 export interface Column<T> {
   key: keyof T;
   title: string;
   sortable?: boolean;
   className?: string;
-  render?: (value: T[keyof T], row: T) => React.ReactNode;
+  render?: (value: T[keyof T], row: T) => ReactNode;
 }
 
 export interface Filter {
@@ -30,5 +33,25 @@ export interface TableConfig<T, R = never> {
     };
   };
   rowClassName?: string;
-  renderHeaderButton?: React.ReactNode;
+  renderHeaderButton?: ReactNode;
+  dialog?: DialogConfig<T>;
+}
+
+export interface DialogConfig<T> {
+  title: (row: T) => {
+    label: string;
+    highlight: string;
+  };
+  content: (row: T) => {
+    photo_url?: string;
+    sections: {
+      title?: string;
+      content: ReactNode;
+    }[];
+  };
+  actions?: (row: T) => {
+    variant: ButtonVariant;
+    label: string;
+    onClick: () => void;
+  }[];
 }

@@ -4,6 +4,8 @@ import { SolarSort } from "@/shared/icons";
 import { Filter, TableConfig } from "../types";
 import { cn } from "@/shared/lib/utils";
 import { useUser } from "@/app/providers";
+import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/shared/ui/dialog";
+import {Button} from "@/shared/ui/button";
 
 interface TableWidgetProps<T> {
   config: TableConfig<T>;
@@ -153,6 +155,32 @@ export function TableWidget<T>({
     sort_order: config.defaultSort?.order ?? "desc",
   });
 
+  const renderDialogContent = (row: T) => {
+    const dialogContent = config.dialog?.content(row);
+
+    return (
+        <>
+          {dialogContent?.photo_url && (
+              <div className="flex justify-center">
+                <img
+                    src={dialogContent.photo_url}
+                    alt=""
+                    className="object-cover rounded-[16px] max-h-[300px]"
+                />
+              </div>
+          )}
+          {dialogContent?.sections.map((section, index) => (
+              <div key={index} className="flex-1">
+                {section.title && (
+                    <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
+                )}
+                {section.content}
+              </div>
+          ))}
+        </>
+    );
+  };
+
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const loadData = useCallback(async () => {
@@ -292,28 +320,52 @@ export function TableWidget<T>({
             </div>
 
             {data.map((row) => (
-              <div
-                key={String(row[config.rowKey])}
-                className={`grid gap-4 font-body text-[14px] hover:bg-[#F7F7F8] ${onRowClick ? "cursor-pointer" : ""}`}
-                style={{
-                  gridTemplateColumns: `repeat(${config.columns.length}, minmax(0, 1fr))`,
-                }}
-                onClick={() => onRowClick?.(row)}
-              >
-                {config.columns.map((column) => (
-                  <div key={String(column.key)} className="px-6 py-4">
-                    {column.render
-                      ? column.render(row[column.key], row)
-                      : String(row[column.key])}
-                  </div>
-                ))}
-              </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div
+                        key={String(row[config.rowKey])}
+                        className={`grid gap-4 font-body text-[14px] hover:bg-[#F7F7F8] ${onRowClick ? "cursor-pointer" : ""}`}
+                        style={{
+                          gridTemplateColumns: `repeat(${config.columns.length}, minmax(0, 1fr))`,
+                        }}
+                        onClick={() => onRowClick?.(row)}
+                    >
+                      {config.columns.map((column) => (
+                          <div key={String(column.key)} className="px-6 py-4">
+                            {column.render
+                                ? column.render(row[column.key], row)
+                                : String(row[column.key])}
+                          </div>
+                      ))}
+                    </div>
+                  </DialogTrigger>
+                  {config.dialog && (
+                      <DialogContent full>
+                        <DialogHeader full>
+                          <DialogTitle full>
+                            {config.dialog.title(row).label}{' '}
+                            <span className="text-[#E22E65]">
+                              {config.dialog.title(row).highlight}
+                            </span>
+                          </DialogTitle>
+                        </DialogHeader>
+                          {renderDialogContent(row)}
+                        <DialogFooter full>
+                          {config.dialog.actions?.(row).map((action, index) => (
+                              <Button variant={action.variant} key={index} onClick={action.onClick}>
+                                {action.label}
+                              </Button>
+                          ))}
+                        </DialogFooter>
+                      </DialogContent>
+                  )}
+                </Dialog>
             ))}
           </div>
         )}
 
         {renderCustomFooter?.() ?? (
-          <div className="flex items-center justify-between font-body px-6 py-4">
+            <div className="flex items-center justify-between font-body px-6 py-4">
             <div className="flex gap-3 items-center bg-[#fff]">
               <div
                 className={
