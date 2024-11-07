@@ -7,15 +7,24 @@ import {
   useState,
 } from "react";
 
+interface Notification {
+  id: string;
+  title: string;
+  content: string;
+  is_readed: boolean;
+}
+
 interface User {
   id: string;
   name: string;
   login: string;
+  is_admin: boolean;
 }
 
 interface UserContext {
   token: string;
   user?: User;
+  notifications?: Notification[];
   getUser: () => void;
   rememberToken: (token: string, remember: boolean) => void;
   logout: () => void;
@@ -33,6 +42,7 @@ export const UserContext = createContext(defaultValues);
 
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User>();
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [token, setToken] = useState<string>(defaultValues.token);
 
   const rememberToken = (token: string, remember: boolean) => {
@@ -54,12 +64,25 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
     if (res.status != 200) {
       return;
+    } else {
+      setUser(undefined);
+      setToken("");
     }
     setToken(localStorage.getItem("token") as string);
 
     console.log(localStorage.getItem("token"), token);
 
     setUser(body["result"]);
+
+    const notifres = await fetch(API_URL + "/v1/user/notifications", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    const notifbody = await notifres.json();
+
+    setNotifications(notifbody["result"]);
   };
 
   const logout = async () => {
@@ -85,6 +108,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const values = {
     token,
     user,
+    notifications,
     logout,
     getUser,
     rememberToken,

@@ -1,7 +1,8 @@
-import { LogoIcon } from "@/shared/icons";
+import {LogoIcon, SolarUsers} from "@/shared/icons";
 import { FC } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { sidebarLinks } from "../links";
+import {useUser} from "@/app/providers";
 
 function getLabelByRoute(route: string): string {
   switch (route) {
@@ -17,6 +18,7 @@ function getLabelByRoute(route: string): string {
 }
 
 export const SidebarWidget: FC = () => {
+  const { user } = useUser();
   const location = useLocation();
   return (
     <nav className="flex flex-col pt-6 px-4 flex-shrink-0 w-[256px]">
@@ -46,6 +48,22 @@ export const SidebarWidget: FC = () => {
             </NavLink>
           </li>
         ))}
+        {user?.is_admin ? (
+            <li className="">
+              <NavLink
+                  className={({isActive}) =>
+                      [
+                        isActive ? "bg-bg-surface1 text-accent" : "text-fg-muted",
+                        "flex gap-[10px] [&>svg]:fill-current p-5 items-center rounded-m",
+                      ].join(" ")
+                  }
+                  to={"/admin"}
+              >
+                <SolarUsers/>
+                <span className="body-l-strong text-fg">Пользователи</span>
+              </NavLink>
+            </li>
+        ) : null}
       </ul>
     </nav>
   );

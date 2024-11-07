@@ -26,3 +26,4 @@ export { SolarPriority } from "./solar-priority.tsx";
 export { SolarMap } from "./solar-map.tsx";
 export { SolarTarget } from "./solar-target.tsx";
 export { SolarLogout } from "./solar-logout.tsx";
+export { SolarUsers } from "./solar-users.tsx";

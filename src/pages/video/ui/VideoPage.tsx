@@ -4,6 +4,16 @@ import { TableWidget } from "@/widgets/table";
 import {TableConfig} from "@/widgets/table/types";
 import {Card} from "@/shared/ui/card";
 import {SolarMap} from "@/shared/icons";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/shared/ui/dialog";
+import {Button} from "@/shared/ui/button";
 
 export const VideoPage = () => {
   const tableConfig: TableConfig<Camera, CamerasResponse> = {
@@ -35,9 +45,29 @@ export const VideoPage = () => {
     rowClassName:
       "hover:bg-[#F7F7F8] cursor-pointer transition-colors duration-200",
     renderHeaderButton: (
-      <button className="bg-[#E22E65] hover:bg-[#E22E65]/75 text-white rounded-[16px] w-12 h-12 flex items-center justify-center shadow-md transition-colors duration-200">
-        <AddLarge fill={"#fff"} className="w-5 h-5" />
-      </button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button
+                className="bg-[#E22E65] hover:bg-[#E22E65]/75 text-white rounded-[16px] w-12 h-12 flex items-center justify-center shadow-md transition-colors duration-200">
+              <AddLarge fill={"#fff"} className="w-5 h-5"/>
+            </button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Добавить камеру</DialogTitle>
+              <DialogDescription>Описание</DialogDescription>
+            </DialogHeader>
+            <div className="flex justify-center">
+              <img src="/add-illustration.png" width={"240px"} height={"240px"} alt=""/>
+            </div>
+            <div className="flex-1">
+              // TODO: Добавить инпуты
+            </div>
+            <DialogFooter>
+              <Button>Добавить</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
     ),
     dialog: {
       title: (row: Camera) => ({

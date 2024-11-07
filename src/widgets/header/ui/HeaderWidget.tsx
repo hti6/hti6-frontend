@@ -18,8 +18,7 @@ import {
   DialogTrigger,
 } from "@/shared/ui/dialog";
 import { useUser } from "@/app/providers";
-import {FormControl, FormField, FormItem} from "@/shared/ui/form/form.tsx";
-import {Input} from "@/shared/ui/input";
+import {sidebarLinks} from "@/widgets/sidebar/links.ts";
 
 function getLabelByRoute(route: string): string {
   switch (route) {
@@ -42,7 +41,7 @@ function getApplications(): { status: string; count: number }[] {
 }
 
 export const HeaderWidget: FC = () => {
-  const { logout, user } = useUser();
+  const { logout, user, notifications } = useUser();
   const location = useLocation();
   return (
     <header className="mb-2">
@@ -88,7 +87,29 @@ export const HeaderWidget: FC = () => {
                   нейро <span className="text-accent">уведомления</span>
                 </DialogTitle>
               </DialogHeader>
-              <div className="flex-1">hey</div>
+                {notifications?.length === 0 || notifications == null ? (
+                    <div className={"flex flex-col gap-[32px] items-center justify-center w-full h-full"}>
+                      <img src="/search-illustration.png" width={"240px"} height={"240px"} />
+                      <div className={"flex flex-col items-center justify-center gap-[16px]"}>
+                        <p className={"font-heading text-[28px]"}>У ВАС ПОКА НЕТ УВЕДОМЛЕНИЙ</p>
+                        <p className={"font-body text-[18px] text-[#93979F]"}>Описание сценария</p>
+                      </div>
+                    </div>
+                ) : (
+                    notifications?.map((row) => (
+                        <div className={"flex flex-col gap-[10px] bg-[#FAFAFB] rounded-[24px] p-[24px]"}>
+                          <div className={"flex items-center gap-[4px]"}>
+                            <p>{row.id}</p>
+                          </div>
+                          <p>
+                            {row.title}
+                          </p>
+                          <p>
+                            {row.content}
+                          </p>
+                        </div>
+                    ))
+                )}
             </DialogContent>
           </Dialog>
           <Dialog>
@@ -96,8 +117,8 @@ export const HeaderWidget: FC = () => {
               <Avatar>
                 <AvatarFallback>
                   <IconButton
-                    className="p-2 py-[7.5px]"
-                    variant="secondary"
+                      className="p-2 py-[7.5px]"
+                      variant="secondary"
                     color="neutral"
                     size="lg"
                   >
