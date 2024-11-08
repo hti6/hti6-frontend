@@ -18,7 +18,6 @@ import {
   DialogTrigger,
 } from "@/shared/ui/dialog";
 import { useUser } from "@/app/providers";
-import {sidebarLinks} from "@/widgets/sidebar/links.ts";
 
 function getLabelByRoute(route: string): string {
   switch (route) {
