@@ -14,6 +14,12 @@ import {
   DialogTrigger
 } from "@/shared/ui/dialog";
 import {Button} from "@/shared/ui/button";
+import {useUser} from "@/app/providers";
+import {z} from "zod";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Form, FormControl, FormField, FormItem, FormMessage} from "@/shared/ui/form/form.tsx";
+import {Input} from "@/shared/ui/input";
 
 export const VideoPage = () => {
   const tableConfig: TableConfig<Camera, CamerasResponse> = {
@@ -29,7 +35,7 @@ export const VideoPage = () => {
         key: "latitude",
         title: "МЕСТОПОЛОЖЕНИЕ",
         className: "flex-1",
-        render: () => (<span>г. Якутск, Ленина 1</span>),
+        render: (_value: string | number, row: Camera) => (<span>{row.latitude + ', ' + row.longitude}</span>),
       },
     ],
     defaultSort: {
@@ -45,29 +51,7 @@ export const VideoPage = () => {
     rowClassName:
       "hover:bg-[#F7F7F8] cursor-pointer transition-colors duration-200",
     renderHeaderButton: (
-        <Dialog>
-          <DialogTrigger asChild>
-            <button
-                className="bg-[#E22E65] hover:bg-[#E22E65]/75 text-white rounded-[16px] w-12 h-12 flex items-center justify-center shadow-md transition-colors duration-200">
-              <AddLarge fill={"#fff"} className="w-5 h-5"/>
-            </button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Добавить камеру</DialogTitle>
-              <DialogDescription>Описание</DialogDescription>
-            </DialogHeader>
-            <div className="flex justify-center">
-              <img src="/add-illustration.png" width={"240px"} height={"240px"} alt=""/>
-            </div>
-            <div className="flex-1">
-              // TODO: Добавить инпуты
-            </div>
-            <DialogFooter>
-              <Button>Добавить</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <AddCameraDialog />
     ),
     dialog: {
       title: (row: Camera) => ({
@@ -75,7 +59,7 @@ export const VideoPage = () => {
         highlight: `ID ${row.id}`
       }),
       content: (row: Camera) => ({
-        photo_url: row.url,
+        photo_url: row.photo_url,
         sections: [
           {
             content: (
@@ -121,5 +105,137 @@ export const VideoPage = () => {
       )}
       className="bg-white rounded-[24px] shadow-sm"
     />
+  );
+};
+
+
+const AddCameraDialog = () => {
+  const {token} = useUser()
+
+  const formSchema = z.object({
+    name: z.string().min(2, 'Имя должно содержать минимум 2 символа'),
+    url: z.string().min(15, 'URL должен содержать минимум 15 символов'),
+    latitude: z.string().min(2, 'Координаты должны содержать минимум 2 символа'),
+    longitude: z.string().min(2, 'Координаты должны содержать минимум 2 символа'),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      url: "",
+      latitude: "",
+      longitude: "",
+    },
+  });
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const res = await fetch("http://nvision.su/api/v1/user/cameras", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+    alert(json.message)
+  };
+
+  return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <button
+              className="bg-[#E22E65] hover:bg-[#E22E65]/75 text-white rounded-[16px] w-12 h-12 flex items-center justify-center shadow-md transition-colors duration-200">
+            <AddLarge fill={"#fff"} className="w-5 h-5"/>
+          </button>
+        </DialogTrigger>
+
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Добавить камеру</DialogTitle>
+            <DialogDescription>Заполните данные нового пользователя</DialogDescription>
+          </DialogHeader>
+
+          <div className="flex justify-center my-4">
+            <img src="/add-illustration.png" alt="Иллюстрация" className="w-60 h-60" />
+          </div>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                              placeholder="Имя"
+                              {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                  )}
+              />
+
+              <FormField
+                  control={form.control}
+                  name="url"
+                  render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                              placeholder="URL"
+                              {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                  )}
+              />
+
+              <FormField
+                  control={form.control}
+                  name="latitude"
+                  render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                              placeholder="Широта"
+                              value={field.value}
+                              onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                  )}
+              />
+
+              <FormField
+                  control={form.control}
+                  name="longitude"
+                  render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                              placeholder="Долгота"
+                              value={field.value}
+                              onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                  )}
+              />
+
+              <DialogFooter>
+                <Button type="submit">
+                  Добавить
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
   );
 };

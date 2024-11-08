@@ -5,6 +5,7 @@ export interface Camera {
   latitude: number;
   longitude: number;
   created_at: string;
+  photo_url: string;
 }
 
 export interface CamerasResponse {
