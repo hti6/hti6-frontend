@@ -1,4 +1,4 @@
-import {SolarLogout, SolarNotificationBellIcon} from "@/shared/icons";
+import {BoltIcon, SolarLogout, SolarNotificationBellIcon} from "@/shared/icons";
 import { SolarUserRoundedIcon } from "@/shared/icons/solar-user-rounded";
 import { cn } from "@/shared/lib/utils";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
@@ -96,19 +96,26 @@ export const HeaderWidget: FC = () => {
                       </div>
                     </div>
                 ) : (
-                    notifications?.map((row) => (
-                        <div className={"flex flex-col gap-[10px] bg-[#FAFAFB] rounded-[24px] p-[24px]"}>
-                          <div className={"flex items-center gap-[4px]"}>
-                            <p>{row.id}</p>
+                    <div className={"flex-1 px-[16px] h-full overflow-y-scroll"}>
+                      {notifications?.map((row) => (
+                      <div className={"flex flex-col gap-[10px] bg-[#FAFAFB] rounded-[24px] p-[24px]"}>
+                        <div className={"flex items-center gap-[4px]"}>
+                          <div className={"rounded-[7px] p-[4px] flex justify-center items-center bg-[#F291001A] text-[#F29100] [&>svg]:fill-current"}>
+                            <BoltIcon />
                           </div>
-                          <p>
-                            {row.title}
-                          </p>
-                          <p>
-                            {row.content}
-                          </p>
+                          <div className={"bg-[#F291001A] rounded-[8px] py-[4px] px-[8px] flex justify-center items-center"}>
+                            <p className={"font-display text-[12px] text-[#CE7B00]"}>{row.id}</p>
+                          </div>
                         </div>
-                    ))
+                        <p className={"font-heading"}>
+                          {row.title}
+                        </p>
+                        <p className={"font-body"}>
+                          {row.content}
+                        </p>
+                      </div>
+                      ))}
+                    </div>
                 )}
             </DialogContent>
           </Dialog>
