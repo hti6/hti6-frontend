@@ -317,17 +317,20 @@ const UserDialog: FC<UserDialogProps> = ({ row, onUpdate }) => {
                 </div>
             </div>
             <div className={"border-t-[1px] border-[#595F6B1A]"}>
-                <div className={"flex flex-col py-[20px]"}>
-                    <p className={"font-body text-[16px]"}>Ваше имя</p>
-                    <p className={"font-description text-[#93979F] text-[12px]"}>
-                        Используется для входа по логину
-                    </p>
+                <div className={"flex justify-between items-center"}>
+                    <div className={"flex flex-col py-[20px]"}>
+                        <p className={"font-body text-[16px]"}>Имя пользователя</p>
+                        <p className={"font-description text-[#93979F] text-[12px]"}>
+                            Используется для отображения имени
+                        </p>
+                    </div>
                     <input
                         value={row.name}
                         onChange={handleNameChange}
                         id={row.id + "/name"}
                         type="text"
-                        className="mt-2 p-2 border rounded"
+                        placeholder={"Имя пользователя"}
+                        className="mt-2 py-[8px] px-[12px] w-1/2 border-[1.5px] border-[#595F6B0A] bg-[#FAFAFB] rounded-[16px]"
                     />
                 </div>
             </div>
