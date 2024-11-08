@@ -260,6 +260,10 @@ export function TableWidget<T>({
     }));
   };
 
+  const handleRefetch = useCallback(() => {
+    loadData();
+  }, [loadData]);
+
   return (
     <div className={`flex flex-col h-full ${className || ""}`}>
       {renderCustomHeader?.() ?? (
@@ -268,7 +272,7 @@ export function TableWidget<T>({
           onFilter={handleFilter}
           activeFilter={queryParams.filter}
           filters={config.filters}
-          renderHeaderButton={config.renderHeaderButton}
+          renderHeaderButton={config.renderHeaderButton?.(handleRefetch)}
         />
       )}
 
@@ -351,7 +355,7 @@ export function TableWidget<T>({
                         </DialogHeader>
                           {renderDialogContent(row)}
                         <DialogFooter full>
-                          {config.dialog.actions?.(row).map((action, index) => (
+                          {config.dialog.actions?.(row, loadData).map((action, index) => (
                               <Button variant={action.variant} key={index} onClick={action.onClick}>
                                 {action.label}
                               </Button>

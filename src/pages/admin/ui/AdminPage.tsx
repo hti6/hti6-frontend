@@ -74,8 +74,8 @@ export const AdminPage: FC = () => {
         }),
         rowClassName:
             "hover:bg-[#F7F7F8] cursor-pointer transition-colors duration-200",
-        renderHeaderButton: (
-            <AddUserDialog />
+        renderHeaderButton: (onRefetch) => (
+            <AddUserDialog onRefetch={onRefetch} />
         ),
         dialog: {
             title: () => ({
@@ -107,27 +107,39 @@ export const AdminPage: FC = () => {
                     ]
                 }
             },
-            actions: (row: User) => [
+            actions: (row: User, onRefetch) => [
                 {
                     variant: 'primary',
                     label: "Удалить пользователя",
                     onClick: async () => {
-                        const res = await fetch("http://nvision.su/api/v1/admin/" + row.id, {
-                            method: "DELETE",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Accept": "application/json",
-                                "Authorization": "Bearer " + token
-                            },
-                        });
-                        const json = await res.json();
-                        alert(json.message);
+                        try {
+                            const res = await fetch("http://nvision.su/api/v1/admin/" + row.id, {
+                                method: "DELETE",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Accept": "application/json",
+                                    "Authorization": "Bearer " + token
+                                },
+                            });
+                            const json = await res.json();
 
-                        setEditedUsers(prev => {
-                            const newState = { ...prev };
-                            delete newState[row.id];
-                            return newState;
-                        });
+                            if (res.ok) {
+                                setEditedUsers(prev => {
+                                    const newState = { ...prev };
+                                    delete newState[row.id];
+                                    return newState;
+                                });
+                                onRefetch();
+                                const dialogTrigger = document.querySelector('[role="dialog"]')?.querySelector('[aria-label="Close"]');
+                                if (dialogTrigger instanceof HTMLElement) {
+                                    dialogTrigger.click();
+                                }
+                            }
+                            alert(json.message);
+                        } catch (error) {
+                            console.error('Error deleting user:', error);
+                            alert('Ошибка при удалении пользователя');
+                        }
                     }
                 },
                 {
@@ -139,6 +151,7 @@ export const AdminPage: FC = () => {
                         const data = {
                             name: updatedUser.name,
                         }
+
                         try {
                             const res = await fetch(`http://nvision.su/api/v1/admin/${row.id}`, {
                                 method: "PUT",
@@ -150,6 +163,14 @@ export const AdminPage: FC = () => {
                                 body: JSON.stringify(data),
                             });
                             const json = await res.json();
+
+                            if (res.ok) {
+                                onRefetch();
+                                const dialogTrigger = document.querySelector('[role="dialog"]')?.querySelector('[aria-label="Close"]');
+                                if (dialogTrigger instanceof HTMLElement) {
+                                    dialogTrigger.click();
+                                }
+                            }
                             alert(json.message);
                         } catch (error) {
                             console.error('Ошибка при сохранении:', error);
@@ -179,7 +200,12 @@ export const AdminPage: FC = () => {
         />
     );
 }
-const AddUserDialog = () => {
+
+interface AddUserDialogProps {
+    onRefetch: () => void;
+}
+
+const AddUserDialog: FC<AddUserDialogProps> = ({onRefetch}) => {
     const {token} = useUser()
 
     const formSchema = z.object({
@@ -198,17 +224,34 @@ const AddUserDialog = () => {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
-        const res = await fetch("http://nvision.su/api/v1/admin", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": "Bearer " + token
-            },
-            body: JSON.stringify(data),
-        });
-        const json = await res.json();
-        alert(json.message)
+        try {
+            const res = await fetch("http://nvision.su/api/v1/admin", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(data),
+            });
+            const json = await res.json();
+
+            if (res.ok) {
+                // Reset form
+                form.reset();
+                // Call refetch to update the table
+                onRefetch();
+                // Close dialog
+                const dialogTrigger = document.querySelector('[role="dialog"]')?.querySelector('[aria-label="Close"]');
+                if (dialogTrigger instanceof HTMLElement) {
+                    dialogTrigger.click();
+                }
+            }
+            alert(json.message);
+        } catch (error) {
+            console.error('Error adding user:', error);
+            alert('Ошибка при добавлении пользователя');
+        }
     };
 
     return (

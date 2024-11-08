@@ -27,6 +27,8 @@ function getLabelByRoute(route: string): string {
       return "камеры";
     case "/map":
       return "карта";
+    case "/admin":
+      return "пользователи";
     default:
       return "Добро пожаловать в Нейро Портал!";
   }
@@ -95,7 +97,7 @@ export const HeaderWidget: FC = () => {
                       </div>
                     </div>
                 ) : (
-                    <div className={"flex-1 px-[16px] h-full overflow-y-scroll"}>
+                    <div className={"flex flex-col gap-2 px-[16px] h-full overflow-y-scroll"}>
                       {notifications?.map((row) => (
                       <div className={"flex flex-col gap-[10px] bg-[#FAFAFB] rounded-[24px] p-[24px]"}>
                         <div className={"flex items-center gap-[4px]"}>

@@ -21,6 +21,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/shared/ui/form/form.tsx";
 import {Input} from "@/shared/ui/input";
 
+type RefetchFunction = () => void;
+
 export const VideoPage = () => {
   const tableConfig: TableConfig<Camera, CamerasResponse> = {
     endpoint: "http://nvision.su/api/v1/user/cameras",
@@ -50,8 +52,8 @@ export const VideoPage = () => {
     }),
     rowClassName:
       "hover:bg-[#F7F7F8] cursor-pointer transition-colors duration-200",
-    renderHeaderButton: (
-        <AddCameraDialog />
+    renderHeaderButton: (onRefetch: RefetchFunction) => (
+        <AddCameraDialog onRefetch={onRefetch} />
     ),
     dialog: {
       title: (row: Camera) => ({
@@ -109,7 +111,7 @@ export const VideoPage = () => {
 };
 
 
-const AddCameraDialog = () => {
+const AddCameraDialog = ({ onRefetch }: { onRefetch: RefetchFunction }) => {
   const {token} = useUser()
 
   const formSchema = z.object({
@@ -130,17 +132,32 @@ const AddCameraDialog = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const res = await fetch("http://nvision.su/api/v1/user/cameras", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer " + token
-      },
-      body: JSON.stringify(data),
-    });
-    const json = await res.json();
-    alert(json.message)
+    try {
+      const res = await fetch("http://nvision.su/api/v1/user/cameras", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+
+      if (res.ok) {
+        onRefetch();
+        form.reset();
+
+        const dialogTrigger = document.querySelector('[role="dialog"]')?.querySelector('[aria-label="Close"]');
+        if (dialogTrigger instanceof HTMLElement) {
+          dialogTrigger.click();
+        }
+      }
+      alert(json.message);
+    } catch (error) {
+      console.error('Error adding camera:', error);
+      alert('Ошибка при добавлении камеры');
+    }
   };
 
   return (

@@ -33,7 +33,7 @@ export interface TableConfig<T, R = never> {
     };
   };
   rowClassName?: string;
-  renderHeaderButton?: ReactNode;
+  renderHeaderButton?: (onRefetch: () => void) => React.ReactNode;
   dialog?: DialogConfig<T>;
 }
 
@@ -49,7 +49,7 @@ export interface DialogConfig<T> {
       content: ReactNode;
     }[];
   };
-  actions?: (row: T) => {
+  actions?: (row: T, onRefetch: () => void) => {
     variant: ButtonVariant;
     label: string;
     onClick: () => void;
