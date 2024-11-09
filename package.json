@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@2gis/mapgl": "^1.53.0",
+    "@2gis/mapgl-clusterer": "^2.5.0",
     "@atomaro/icons": "^1.0.1",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "^1.2.1",
@@ -26,6 +28,7 @@
     "@typescript-eslint/utils": "^8.12.2",
     "clsx": "^2.1.1",
     "imask": "^7.6.1",
+    "ol": "^10.2.1",
     "path": "^0.12.7",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",

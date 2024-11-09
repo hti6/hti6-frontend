@@ -31,7 +31,7 @@ export const SidebarWidget: FC = () => {
       </Link>
       <ul className="mt-8">
         {sidebarLinks.map((link) => (
-          <li className="">
+          <li key={link.href}>
             <NavLink
               className={({ isActive }) =>
                 [
@@ -41,7 +41,7 @@ export const SidebarWidget: FC = () => {
               }
               to={link.href}
             >
-              {<link.Icon />}
+              <link.Icon />
               <span className="body-l-strong text-fg">{link.label}</span>
             </NavLink>
           </li>
