@@ -100,7 +100,7 @@ export const ApplicationsPage = () => {
           {
             content: (
                 <div className="grid grid-cols-2 gap-4">
-                  <Card icon={<SolarUserRoundedIcon/>} title={"Сотрудник"} content={row.user.name} />
+                  <Card icon={<SolarUserRoundedIcon/>} title={"Сотрудник"} content={row.user?.name} />
                   <Card icon={<SolarCalendar/>} title={"Дата заявки"} content={new Date(row.created_at).toLocaleDateString('ru-RU')} />
                   <Card icon={<SolarPriority/>} title={"Срочность"} content={row.priority == "critical"
                       ? "Критический"

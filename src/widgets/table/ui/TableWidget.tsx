@@ -260,15 +260,19 @@ export function TableWidget<T>({
     }));
   };
 
+  const handleRefetch = useCallback(() => {
+    loadData();
+  }, [loadData]);
+
   return (
-    <div className={`flex flex-col h-full ${className || ""}`}>
+    <div className={`flex flex-col ${className || ""}`}>
       {renderCustomHeader?.() ?? (
         <TableHeader
           onSearch={handleSearch}
           onFilter={handleFilter}
           activeFilter={queryParams.filter}
           filters={config.filters}
-          renderHeaderButton={config.renderHeaderButton}
+          renderHeaderButton={config.renderHeaderButton?.(handleRefetch)}
         />
       )}
 
@@ -280,7 +284,7 @@ export function TableWidget<T>({
         ) : data.length === 0 && renderEmptyState ? (
           renderEmptyState()
         ) : (
-          <div className="w-full">
+          <div className="flex flex-col justify-between h-[62vh] w-full">
             <div
               className={"grid gap-4 bg-[#F7F7F8] rounded-[12px]"}
               style={{
@@ -318,116 +322,116 @@ export function TableWidget<T>({
                 </div>
               ))}
             </div>
-
-            {data.map((row) => (
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div
-                        key={String(row[config.rowKey])}
-                        className={`grid gap-4 font-body text-[14px] hover:bg-[#F7F7F8] ${onRowClick ? "cursor-pointer" : ""}`}
-                        style={{
-                          gridTemplateColumns: `repeat(${config.columns.length}, minmax(0, 1fr))`,
-                        }}
-                        onClick={() => onRowClick?.(row)}
-                    >
-                      {config.columns.map((column) => (
-                          <div key={String(column.key)} className="px-6 py-4">
-                            {column.render
-                                ? column.render(row[column.key], row)
-                                : String(row[column.key])}
-                          </div>
-                      ))}
-                    </div>
-                  </DialogTrigger>
-                  {config.dialog && (
-                      <DialogContent full>
-                        <DialogHeader full>
-                          <DialogTitle full>
-                            {config.dialog.title(row).label}{' '}
-                            <span className="text-[#E22E65]">
+            <div className={"flex flex-col h-full justify-start overflow-y-scroll"}>
+              {data.map((row) => (
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <div
+                          key={String(row[config.rowKey])}
+                          className={`grid gap-4 font-body text-[14px] hover:bg-[#F7F7F8] ${onRowClick ? "cursor-pointer" : ""}`}
+                          style={{
+                            gridTemplateColumns: `repeat(${config.columns.length}, minmax(0, 1fr))`,
+                          }}
+                          onClick={() => onRowClick?.(row)}
+                      >
+                        {config.columns.map((column) => (
+                            <div key={String(column.key)} className="px-6 py-4">
+                              {column.render
+                                  ? column.render(row[column.key], row)
+                                  : String(row[column.key])}
+                            </div>
+                        ))}
+                      </div>
+                    </DialogTrigger>
+                    {config.dialog && (
+                        <DialogContent full>
+                          <DialogHeader full>
+                            <DialogTitle full>
+                              {config.dialog.title(row).label}{' '}
+                              <span className="text-[#E22E65]">
                               {config.dialog.title(row).highlight}
                             </span>
-                          </DialogTitle>
-                        </DialogHeader>
+                            </DialogTitle>
+                          </DialogHeader>
                           {renderDialogContent(row)}
-                        <DialogFooter full>
-                          {config.dialog.actions?.(row).map((action, index) => (
-                              <Button variant={action.variant} key={index} onClick={action.onClick}>
-                                {action.label}
-                              </Button>
-                          ))}
-                        </DialogFooter>
-                      </DialogContent>
-                  )}
-                </Dialog>
-            ))}
-          </div>
-        )}
-
-        {renderCustomFooter?.() ?? (
-            <div className="flex items-center justify-between font-body px-6 py-4">
-            <div className="flex gap-3 items-center bg-[#fff]">
-              <div
-                className={
-                  "flex items-center text-base border-[1.5px] border-[#595F6B0A] rounded-[16px]"
-                }
-              >
-                <button
-                  className={"p-3"}
-                  onClick={() =>
-                    setQueryParams((prev) => ({
-                      ...prev,
-                      page: prev.page! - 1,
-                    }))
-                  }
-                  disabled={currentPage <= 1}
-                >
-                  <RemoveSmall fill={"#93979F"} className={"w-6 h-6"} />
-                </button>
-                <span>{currentPage}</span>
-                <button
-                  className={"p-3"}
-                  onClick={() =>
-                    setQueryParams((prev) => ({
-                      ...prev,
-                      page: prev.page! + 1,
-                    }))
-                  }
-                  disabled={
-                    currentPage >= Math.ceil(total / queryParams.first!)
-                  }
-                >
-                  <AddSmall fill={"#93979F"} className={"w-6 h-6"} />
-                </button>
-              </div>
-              <span className="text-[#93979F]">
+                          <DialogFooter full>
+                            {config.dialog.actions?.(row, loadData).map((action, index) => (
+                                <Button variant={action.variant} key={index} onClick={action.onClick}>
+                                  {action.label}
+                                </Button>
+                            ))}
+                          </DialogFooter>
+                        </DialogContent>
+                    )}
+                  </Dialog>
+              ))}
+            </div>
+            {renderCustomFooter?.() ?? (
+                <div className="flex items-center justify-between font-body px-6 py-4">
+                  <div className="flex gap-3 items-center bg-[#fff]">
+                    <div
+                        className={
+                          "flex items-center text-base border-[1.5px] border-[#595F6B0A] rounded-[16px]"
+                        }
+                    >
+                      <button
+                          className={"p-3"}
+                          onClick={() =>
+                              setQueryParams((prev) => ({
+                                ...prev,
+                                page: prev.page! - 1,
+                              }))
+                          }
+                          disabled={currentPage <= 1}
+                      >
+                        <RemoveSmall fill={"#93979F"} className={"w-6 h-6"} />
+                      </button>
+                      <span>{currentPage}</span>
+                      <button
+                          className={"p-3"}
+                          onClick={() =>
+                              setQueryParams((prev) => ({
+                                ...prev,
+                                page: prev.page! + 1,
+                              }))
+                          }
+                          disabled={
+                              currentPage >= Math.ceil(total / queryParams.first!)
+                          }
+                      >
+                        <AddSmall fill={"#93979F"} className={"w-6 h-6"} />
+                      </button>
+                    </div>
+                    <span className="text-[#93979F]">
                 из {Math.ceil(total / queryParams.first!)}
               </span>
-            </div>
-            <div className="flex items-center gap-4 text-[#93979F]">
-              <span>Показать:</span>
-              <select
-                className="rounded-[16px] border-[1.5px] border-[#595F6B0A] p-4 text-[#000]"
-                value={queryParams.first}
-                onChange={(e) =>
-                  setQueryParams((prev) => ({
-                    ...prev,
-                    first: Number(e.target.value),
-                    page: 1,
-                  }))
-                }
-              >
-                {(config.perPageOptions ?? [15, 30, 50, 100]).map((option) => (
-                  <option key={option} value={option}>
-                    {option} строк
-                  </option>
-                ))}
-              </select>
-              <span>
+                  </div>
+                  <div className="flex items-center gap-4 text-[#93979F]">
+                    <span>Показать:</span>
+                    <select
+                        className="rounded-[16px] border-[1.5px] border-[#595F6B0A] p-4 text-[#000]"
+                        value={queryParams.first}
+                        onChange={(e) =>
+                            setQueryParams((prev) => ({
+                              ...prev,
+                              first: Number(e.target.value),
+                              page: 1,
+                            }))
+                        }
+                    >
+                      {(config.perPageOptions ?? [15, 30, 50, 100]).map((option) => (
+                          <option key={option} value={option}>
+                            {option} строк
+                          </option>
+                      ))}
+                    </select>
+                    <span>
                 {(currentPage - 1) * queryParams.first! + 1}-
-                {Math.min(currentPage * queryParams.first!, total)} из {total}
+                      {Math.min(currentPage * queryParams.first!, total)} из {total}
               </span>
-            </div>
+                  </div>
+                </div>
+            )}
           </div>
         )}
       </div>
