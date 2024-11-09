@@ -1,6 +1,6 @@
 import {BoltIcon, SolarLogout, SolarNotificationBellIcon} from "@/shared/icons";
 import { SolarUserRoundedIcon } from "@/shared/icons/solar-user-rounded";
-import { cn } from "@/shared/lib/utils";
+// import { cn } from "@/shared/lib/utils";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import { Button, IconButton } from "@/shared/ui/button";
 import { FC } from "react";
@@ -35,12 +35,12 @@ function getLabelByRoute(route: string): string {
   }
 }
 
-function getApplications(): { status: string; count: number }[] {
-  return [
-    { status: "notread", count: 234 },
-    { status: "read", count: 154 },
-  ];
-}
+// function getApplications(): { status: string; count: number }[] {
+//   return [
+//     { status: "notread", count: 234 },
+//     { status: "read", count: 154 },
+//   ];
+// }
 
 export const HeaderWidget: FC = () => {
   const { logout, user, notifications } = useUser();
