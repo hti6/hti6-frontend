@@ -18,6 +18,7 @@ import {
   DialogTrigger,
 } from "@/shared/ui/dialog";
 import { useUser } from "@/app/providers";
+import {AddLarge} from "@atomaro/icons";
 
 function getLabelByRoute(route: string): string {
   switch (route) {
@@ -43,38 +44,39 @@ function getApplications(): { status: string; count: number }[] {
 
 export const HeaderWidget: FC = () => {
   const { logout, user, notifications } = useUser();
+  const date = new Date(user?.created_at as string);
   const location = useLocation();
   return (
     <header className="mb-2">
       <div className="flex justify-between p-6 items-center rounded-b-l bg-bg-surface1">
-        {location.pathname == "/applications" ||
-          location.pathname == "/video" ? (
-          <div className="flex items-center gap-4">
-            <h1 className="uppercase heading-1">
-              {getLabelByRoute(location.pathname)}
-            </h1>
-            <span>Всего: {569}</span>
-            {location.pathname == "/applications" && (
-              <ul className="flex gap-3">
-                {getApplications().map((app) => (
-                  <li className="flex gap-1 items-center body-s-strong text-fg">
-                    <div
-                      className={cn(
-                        "w-2 h-2 rounded-full",
-                        app.status == "notread" ? "bg-neutral" : "bg-success",
-                      )}
-                    />
-                    {app.count}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ) : (
+        {/*{location.pathname == "/applications" ||*/}
+        {/*  // location.pathname == "/video" ? (*/}
+        {/*  // <div className="flex items-center gap-4">*/}
+        {/*  //   <h1 className="uppercase heading-1">*/}
+        {/*  //     {getLabelByRoute(location.pathname)}*/}
+        {/*  //   </h1>*/}
+        {/*  //   <span>Всего: {569}</span>*/}
+            {/*{location.pathname == "/applications" && (*/}
+            {/*  <ul className="flex gap-3">*/}
+            {/*    {getApplications().map((app) => (*/}
+            {/*      <li className="flex gap-1 items-center body-s-strong text-fg">*/}
+            {/*        <div*/}
+            {/*          className={cn(*/}
+            {/*            "w-2 h-2 rounded-full",*/}
+            {/*            app.status == "notread" ? "bg-neutral" : "bg-success",*/}
+            {/*          )}*/}
+            {/*        />*/}
+            {/*        {app.count}*/}
+            {/*      </li>*/}
+            {/*    ))}*/}
+            {/*  </ul>*/}
+            {/*)}*/}
+        {/*  // </div>*/}
+        {/*// ) : (*/}
           <h1 className="uppercase heading-1">
             {getLabelByRoute(location.pathname)}
           </h1>
-        )}
+        {/*)}*/}
         <div className="flex gap-2">
           <Dialog>
             <DialogTrigger asChild>
@@ -141,7 +143,7 @@ export const HeaderWidget: FC = () => {
                   нейро <span className="text-accent">профиль</span>
                 </DialogTitle>
               </DialogHeader>
-              <div className={"flex-1 p-4 divide-y"}>
+              <div className={"flex-1 p-4"}>
                 <div className={"flex gap-4 pb-[32px]"}>
                   <div
                       className={"flex items-center justify-center rounded-[24px] bg-[#F7F7F8] text-[#595F6B] [&>svg]:fill-current w-[96px] h-[96px]"}>
@@ -152,11 +154,49 @@ export const HeaderWidget: FC = () => {
                   </div>
                 </div>
                 <div className={"border-t-[1px] border-[#595F6B1A]"}>
-                  <div className={"flex flex-col py-[20px]"}>
-                    <p className={"font-body text-[16px]"}>Ваше имя</p>
-                    <p className={"font-description text-[#93979F] text-[12px]"}>Используется для входа по логину</p>
+                  <div className={"flex items-center justify-between"}>
+                    <div className={"basis-1/2 flex flex-col py-[20px] w-full"}>
+                      <p className={"font-body text-[16px]"}>Ваше имя</p>
+                      <p className={"font-description text-[#93979F] text-[12px]"}>Используется для отображения</p>
+                    </div>
+                    <div className={"basis-1/2 flex flex-col py-[8px] px-[12px] rounded-[16px] w-full border-[1.5px] border-[#595F6B0A] bg-[#FAFAFB]"}>
+                      <label className={"text-[#93979F] text-[12px] font-description"} htmlFor="name">Имя</label>
+                      <input disabled value={user?.name} className={"bg-transparent"} name="name" type="text"/>
+                    </div>
                   </div>
-                  <div>
+                </div>
+                <div className={"border-t-[1px] border-[#595F6B1A] py-[20px]"}>
+                  <div className={"flex items-start justify-between"}>
+                    <div className={"basis-1/2 flex flex-col w-full"}>
+                      <p className={"font-body text-[16px] text-[#121315]"}>Электронная почта</p>
+                      <p className={"font-body text-[16px] text-[#121315]"}>{user?.name}@mail.ru</p>
+                      <p className={"font-description text-[12px] text-[#93979F]"}>Используется для входа,получения уведомлений
+                        и другой важной информации</p>
+                    </div>
+                    <div className={"basis-1/2 flex items-center w-full"}>
+                      <IconButton className={"bg-[#E22E65] h-[48px] items-center"}>
+                        <AddLarge/>
+                        Добавить почту
+                      </IconButton>
+                    </div>
+                  </div>
+                </div>
+                <div className={"border-t-[1px] border-[#595F6B1A] py-[20px]"}>
+                  <div className={"flex items-start justify-between"}>
+                    <div className={"flex flex-col basis-1/2 w-full"}>
+                      <p className={"font-body text-[16px] text-[#121315]"}>Пароль</p>
+                      <p className={"font-description text-[12px] text-[#93979F]"}>Изменен {date.toLocaleString("ru-RU", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                      })}</p>
+                    </div>
+                    <div className={"basis-1/2 w-full"}>
+                      <IconButton variant={"outline"} className={"text-[#595F6B] outline-[#595F6B14] h-[48px] items-center"}>
+                        <AddLarge/>
+                        Изменить пароль
+                      </IconButton>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -164,7 +204,8 @@ export const HeaderWidget: FC = () => {
               <div className={"p-4"}>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button className={"text-[#E22E65] [&>svg]:fill-current"} variant={"secondary"}><SolarLogout/> Выйти из аккаунта</Button>
+                    <Button className={"text-[#E22E65] [&>svg]:fill-current"} variant={"secondary"}><SolarLogout/> Выйти
+                      из аккаунта</Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>

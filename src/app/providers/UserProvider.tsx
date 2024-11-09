@@ -19,6 +19,7 @@ interface User {
   name: string;
   login: string;
   is_admin: boolean;
+  created_at: string;
 }
 
 interface UserContext {
