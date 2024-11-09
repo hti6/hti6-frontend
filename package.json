@@ -26,6 +26,7 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@typescript-eslint/utils": "^8.12.2",
+    "chart.js": "^4.4.6",
     "clsx": "^2.1.1",
     "imask": "^7.6.1",
     "ol": "^10.2.1",

@@ -175,16 +175,7 @@ export const HeaderWidget: FC = () => {
                     <div className={"flex items-center justify-between"}>
                       <div
                         className={"basis-1/2 flex flex-col py-[20px] w-full"}
-                      >
-                        <p className={"font-body text-[16px]"}>Ваше имя</p>
-                        <p
-                          className={
-                            "font-description text-[#93979F] text-[12px]"
-                          }
-                        >
-                          Используется для отображения
-                        </p>
-                      </div>
+                      ></div>
                       <div
                         className={
                           "basis-1/2 flex flex-col py-[8px] px-[12px] rounded-[16px] w-full border-[1.5px] border-[#595F6B0A] bg-[#FAFAFB]"
